@@ -1,0 +1,10 @@
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\Gestionale.exe.config
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\Gestionale.exe
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\Gestionale.pdb
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.csprojAssemblyReference.cache
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.Form1.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.Properties.Resources.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.csproj.GenerateResource.cache
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.exe
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.pdb
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.users.resources
