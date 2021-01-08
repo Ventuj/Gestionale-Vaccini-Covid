@@ -4,7 +4,8 @@ CREATE TABLE pazienti(
     nome TEXT NOT NULL,
     cognome TEXT NOT NULL,
     codiceFiscale TEXT NOT NULL,
-     PRIMARY KEY(idp)
+    indirizzo TEXT NOT NULL,
+    PRIMARY KEY(idp)
 );
 
 DROP TABLE IF EXISTS tipoPersonale;
