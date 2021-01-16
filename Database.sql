@@ -5,6 +5,9 @@ CREATE TABLE pazienti(
     cognome TEXT NOT NULL,
     codiceFiscale TEXT NOT NULL,
     indirizzo TEXT NOT NULL,
+    comune TEXT NOT NULL,
+    provincia TEXT NOT NULL,
+    regione TEXT NOT NULL
     PRIMARY KEY(idp)
 );
 
