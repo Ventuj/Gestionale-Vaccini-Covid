@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Gestionale
 {
-    public partial class users : Form
+    public partial class home : Form
     {
-        public users() {
+        public home() {
             InitializeComponent();
         }
     }

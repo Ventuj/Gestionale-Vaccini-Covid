@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace Gestionale
@@ -14,6 +15,7 @@ namespace Gestionale
     {
         public Form1() {
             InitializeComponent();
+            SQLiteConnection.CreateFile("database.db");
         }
     }
 }
