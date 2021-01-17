@@ -1,10 +1,11 @@
 CREATE TABLE pazienti (
   idp TEXT PRIMARY KEY NOT NULL,
+  idpe TEXT NOT NULL,
   nome TEXT NOT NULL,
   cognome TEXT NOT NULL,
   codiceFiscale TEXT NOT NULL,
   datadinascita TEXT NOT NULL,
-  luuogodinascita TEXT NOT NULL,
+  luogodinascita TEXT NOT NULL,
   indirizzo TEXT NOT NULL,
   comune TEXT NOT NULL,
   provincia TEXT NOT NULL,
@@ -19,7 +20,8 @@ CREATE TABLE studiomedico (
   idst TEXT PRIMARY KEY NOT NULL,
   telefono TEXT NOT NULL,
   email TEXT NOT NULL,
-  orari TEXT NOT NULL
+  orari TEXT NOT NULL,
+  indirizzo TEXT NOT NULL
 );
 
 CREATE TABLE studioPersonale (
@@ -34,7 +36,12 @@ CREATE TABLE personale (
   cognome TEXT NOT NULL,
   codiceFiscale TEXT NOT NULL,
   datadinascita TEXT NOT NULL,
-  luuogodinascita TEXT NOT NULL,
+  luogodinascita TEXT NOT NULL,
+  indirizzo TEXT NOT NULL,
+  comune TEXT NOT NULL,
+  provincia TEXT NOT NULL,
+  regione TEXT NOT NULL,
+  nazione TEXT NOT NULL,
   telefono TEXT NOT NULL,
   cellulare TEXT NOT NULL,
   email TEXT NOT NULL
@@ -42,11 +49,6 @@ CREATE TABLE personale (
 
 CREATE TABLE operatori (
   idop TEXT PRIMARY KEY NOT NULL,
-  idpe TEXT NOT NULL
-);
-
-CREATE TABLE mediciPazienti (
-  idp TEXT NOT NULL,
   idpe TEXT NOT NULL
 );
 
@@ -115,6 +117,7 @@ CREATE TABLE vaccinoCovid (
 CREATE TABLE prenotazioniCovid (
   idpr TEXT PRIMARY KEY NOT NULL,
   idp TEXT NOT NULL,
+  ids TEXT NOT NULL,
   data TEXT NOT NULL,
   ora TEXT NOT NULL
 );
@@ -137,9 +140,7 @@ ALTER TABLE studioPersonale ADD FOREIGN KEY (idpe) REFERENCES personale (idpe);
 
 ALTER TABLE studioPersonale ADD FOREIGN KEY (idst) REFERENCES studiomedico (idst);
 
-ALTER TABLE mediciPazienti ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
-
-ALTER TABLE mediciPazienti ADD FOREIGN KEY (idpe) REFERENCES personale (idpe);
+ALTER TABLE personale ADD FOREIGN KEY (idpe) REFERENCES pazienti (idpe);
 
 ALTER TABLE vacciniPazienti ADD FOREIGN KEY (idv) REFERENCES vaccini (idv);
 
@@ -172,3 +173,5 @@ ALTER TABLE effettiCollaterali ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
 ALTER TABLE orari ADD FOREIGN KEY (id) REFERENCES strutture (ids);
 
 ALTER TABLE orari ADD FOREIGN KEY (id) REFERENCES studiomedico (idst);
+
+ALTER TABLE prenotazioniCovid ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
