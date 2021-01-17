@@ -1,139 +1,174 @@
-DROP TABLE IF EXISTS pazienti;
-CREATE TABLE pazienti(
-    idp TEXT NOT NULL,
-    nome TEXT NOT NULL,
-    cognome TEXT NOT NULL,
-    codiceFiscale TEXT NOT NULL,
-    indirizzo TEXT NOT NULL,
-    comune TEXT NOT NULL,
-    provincia TEXT NOT NULL,
-    regione TEXT NOT NULL
-    PRIMARY KEY(idp)
+CREATE TABLE pazienti (
+  idp TEXT PRIMARY KEY NOT NULL,
+  nome TEXT NOT NULL,
+  cognome TEXT NOT NULL,
+  codiceFiscale TEXT NOT NULL,
+  datadinascita TEXT NOT NULL,
+  luuogodinascita TEXT NOT NULL,
+  indirizzo TEXT NOT NULL,
+  comune TEXT NOT NULL,
+  provincia TEXT NOT NULL,
+  regione TEXT NOT NULL,
+  nazione TEXT NOT NULL,
+  telefono TEXT NOT NULL,
+  cellulare TEXT NOT NULL,
+  email TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS tipoPersonale;
-CREATE TABLE tipoPersonale(
-    idt TEXT NOT NULL,
-    tipo TEXT NOT NULL,
-    PRIMARY KEY (idt)
+CREATE TABLE studiomedico (
+  idst TEXT PRIMARY KEY NOT NULL,
+  telefono TEXT NOT NULL,
+  email TEXT NOT NULL,
+  orari TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS personale;
-CREATE TABLE personale(
-    idpe TEXT NOT NULL,
-    idt TEXT NOT NULL,
-    nome TEXT NOT NULL,
-    cognome TEXT NOT NULL,
-    codiceFiscale TEXT NOT NULL,
-    PRIMARY KEY (idpe),
-    FOREIGN KEY (idt) REFERENCES tipoPersonale(idt)
+CREATE TABLE studioPersonale (
+  idst TEXT NOT NULL,
+  idpe TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS operatori;
-CREATE TABLE operatori(
-    idop TEXT NOT NULL,
-    idpe TEXT NOT NULL,
-    PRIMARY KEY (idop),
-    FOREIGN KEY (idpe) REFERENCES personale(idpe)
+CREATE TABLE personale (
+  idpe TEXT PRIMARY KEY NOT NULL,
+  tipo TEXT NOT NULL,
+  nome TEXT NOT NULL,
+  cognome TEXT NOT NULL,
+  codiceFiscale TEXT NOT NULL,
+  datadinascita TEXT NOT NULL,
+  luuogodinascita TEXT NOT NULL,
+  telefono TEXT NOT NULL,
+  cellulare TEXT NOT NULL,
+  email TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS mediciPazienti;
-CREATE TABLE mediciPazienti(
-    idp TEXT NOT NULL,
-    idpe TEXT NOT NULL,   
-    FOREIGN KEY (idp) REFERENCES pazienti(idp),
-    FOREIGN KEY (idpe) REFERENCES personale(idpe)
+CREATE TABLE operatori (
+  idop TEXT PRIMARY KEY NOT NULL,
+  idpe TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS vaccini;
-CREATE TABLE vaccini(
-    idv TEXT NOT NULL,
-    tipo TEXT NOT NULL,
-    PRIMARY KEY (idv)
+CREATE TABLE mediciPazienti (
+  idp TEXT NOT NULL,
+  idpe TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS vacciniPazienti;
-CREATE TABLE vacciniPazienti(
-    idv TEXT NOT NULL,
-    idp TEXT NOT NULL,
-    data TEXT NOT NULL,
-    FOREIGN KEY (idv) REFERENCES vaccini(idv),
-     FOREIGN KEY (idp) REFERENCES pazienti(idp)
+CREATE TABLE vaccini (
+  idv TEXT PRIMARY KEY NOT NULL,
+  tipo TEXT NOT NULL,
+  malattia TEXT NOT NULL,
+  casaFarmaceutica TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS strutture;
-CREATE TABLE strutture(
-    ids TEXT NOT NULL,
-    indirizzo TEXT NOT NULL,
-    massimali INTEGER NOT NULL,
-    email TEXT NOT NULL,
-    PRIMARY KEY (ids)
+CREATE TABLE vacciniPazienti (
+  idv TEXT NOT NULL,
+  idp TEXT NOT NULL,
+  data TEXT NOT NULL,
+  datascadenza TEXT NOT NULL,
+  lotto TEXT NOT NULL,
+  dataproduzione TEXT NOT NULL,
+  dose TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS turni;
-CREATE TABLE turni(
-    idtu TEXT NOT NULL,
-    idop TEXT NOT NULL,
-    ids TEXT NOT NULL,
-    data TEXT NOT NULL,
-    ora TEXT NOT NULL,
-    PRIMARY KEY (idtu),
-    FOREIGN KEY (ids) REFERENCES strutture(ids),
-    FOREIGN KEY (idop) REFERENCES operatori(idop)
+CREATE TABLE strutture (
+  ids TEXT PRIMARY KEY NOT NULL,
+  indirizzo TEXT NOT NULL,
+  massimali INTEGER NOT NULL,
+  email TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS orelavorate;
-CREATE TABLE orelavorate(
-    idop TEXT NOT NULL,
-    ids TEXT NOT NULL,
-    data TEXT NOT NULL,
-    ora TEXT NOT NULL,
-    FOREIGN KEY (idop) REFERENCES operatori(idop),
-    FOREIGN KEY (ids) REFERENCES strutture(ids)
+CREATE TABLE turni (
+  idtu TEXT PRIMARY KEY NOT NULL,
+  idop TEXT NOT NULL,
+  ids TEXT NOT NULL,
+  data TEXT NOT NULL,
+  ora TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS spedizioni;
-CREATE TABLE spedizioni(
-    ids TEXT NOT NULL,
-    datap TEXT NOT NULL,
-    datac TEXT NOT NULL,
-    quantita INTEGER NOT NULL,
-    FOREIGN KEY (ids) REFERENCES strutture(ids)
+CREATE TABLE orelavorate (
+  idop TEXT NOT NULL,
+  ids TEXT NOT NULL,
+  data TEXT NOT NULL,
+  ora TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS scorte;
-CREATE TABLE scorte(
-    ids TEXT NOT NULL,
-    quantita INTEGER NOT NULL,
-    FOREIGN KEY (ids) REFERENCES strutture(ids)
+CREATE TABLE spedizioni (
+  ids TEXT NOT NULL,
+  datap TEXT NOT NULL,
+  datac TEXT NOT NULL,
+  quantita INTEGER NOT NULL
 );
 
-DROP TABLE IF EXISTS vaccinoCovid;
-CREATE TABLE vaccinoCovid(
-    idp TEXT NOT NULL,
-    idop TEXT NOT NULL,
-    ids TEXT NOT NULL,
-    data  TEXT NOT NULL,
-    ora TEXT NOT NULL,
-    FOREIGN KEY (idp) REFERENCES pazienti(idp),
-    FOREIGN KEY (idop) REFERENCES operatori(idop),
-    FOREIGN KEY (ids) REFERENCES strutture(ids)
+CREATE TABLE scorte (
+  ids TEXT NOT NULL,
+  quantita INTEGER NOT NULL
 );
 
-DROP TABLE IF EXISTS prenotazioniCovid;
-CREATE TABLE prenotazioniCovid(
-    idpr TEXT NOT NULL,
-    idp TEXT NOT NULL,
-    data TEXT NOT NULL,
-    ora TEXT NOT NULL,
-    PRIMARY KEY (idpr),
-    FOREIGN KEY (idp) REFERENCES pazienti(idp)
+CREATE TABLE vaccinoCovid (
+  idp TEXT NOT NULL,
+  idop TEXT NOT NULL,
+  ids TEXT NOT NULL,
+  data TEXT NOT NULL,
+  ora TEXT NOT NULL,
+  lotto TEXT NOT NULL,
+  dataproduzione TEXT NOT NULL,
+  dose TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS effettiCollaterali;
-CREATE TABLE effettiCollaterali(
-    idp TEXT NOT NULL,
-    data  TEXT NOT NULL,
-    descrizione TEXT NOT NULL,
-    FOREIGN KEY (idp) REFERENCES pazienti(idp)
+CREATE TABLE prenotazioniCovid (
+  idpr TEXT PRIMARY KEY NOT NULL,
+  idp TEXT NOT NULL,
+  data TEXT NOT NULL,
+  ora TEXT NOT NULL
 );
+
+CREATE TABLE effettiCollaterali (
+  idp TEXT NOT NULL,
+  data TEXT NOT NULL,
+  descrizione TEXT NOT NULL
+);
+
+CREATE TABLE orari (
+  id TEXT NOT NULL,
+  orario TEXT NOT NULL,
+  giorno INTEGER NOT NULL
+);
+
+ALTER TABLE operatori ADD FOREIGN KEY (idpe) REFERENCES personale (idpe);
+
+ALTER TABLE studioPersonale ADD FOREIGN KEY (idpe) REFERENCES personale (idpe);
+
+ALTER TABLE studioPersonale ADD FOREIGN KEY (idst) REFERENCES studiomedico (idst);
+
+ALTER TABLE mediciPazienti ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
+
+ALTER TABLE mediciPazienti ADD FOREIGN KEY (idpe) REFERENCES personale (idpe);
+
+ALTER TABLE vacciniPazienti ADD FOREIGN KEY (idv) REFERENCES vaccini (idv);
+
+ALTER TABLE vacciniPazienti ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
+
+ALTER TABLE turni ADD FOREIGN KEY (idop) REFERENCES operatori (idop);
+
+ALTER TABLE turni ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
+
+ALTER TABLE orelavorate ADD FOREIGN KEY (idop) REFERENCES operatori (idop);
+
+ALTER TABLE orelavorate ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
+
+ALTER TABLE spedizioni ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
+
+ALTER TABLE scorte ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
+
+ALTER TABLE vaccinoCovid ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
+
+ALTER TABLE vaccinoCovid ADD FOREIGN KEY (idp) REFERENCES personale (idpe);
+
+ALTER TABLE vaccinoCovid ADD FOREIGN KEY (idop) REFERENCES operatori (idop);
+
+ALTER TABLE vaccinoCovid ADD FOREIGN KEY (ids) REFERENCES strutture (ids);
+
+ALTER TABLE prenotazioniCovid ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
+
+ALTER TABLE effettiCollaterali ADD FOREIGN KEY (idp) REFERENCES pazienti (idp);
+
+ALTER TABLE orari ADD FOREIGN KEY (id) REFERENCES strutture (ids);
+
+ALTER TABLE orari ADD FOREIGN KEY (id) REFERENCES studiomedico (idst);
