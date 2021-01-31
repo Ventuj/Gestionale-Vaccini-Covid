@@ -21,5 +21,12 @@ namespace Gestionale
             database d = new database();
             d.createTable();
         }
+
+        private void zonaPazienti_Click(object sender, EventArgs e) {
+            users u = new users();
+            this.Hide();
+            u.ShowDialog();
+            this.Show();
+        }
     }
 }

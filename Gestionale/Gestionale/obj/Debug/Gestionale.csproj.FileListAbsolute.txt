@@ -22,6 +22,6 @@ D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\G
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\System.Memory.xml
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\System.Numerics.Vectors.xml
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.home.resources
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.ViewUser.resources
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.csproj.CopyComplete
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.users.resources
