@@ -12,8 +12,15 @@ namespace Gestionale
 {
     public partial class ViewUser : Form
     {
-        public ViewUser() {
+        string idp = "";
+        public ViewUser(string id) {
             InitializeComponent();
+            idp = id;
+            label1.Text = Convert.ToString(idp);
+        }
+
+        private void ViewUser_Load(object sender, EventArgs e) {
+
         }
     }
 }

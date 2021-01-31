@@ -32,7 +32,7 @@
             // 
             // createTable
             // 
-            this.createTable.Location = new System.Drawing.Point(25, 24);
+            this.createTable.Location = new System.Drawing.Point(12, 12);
             this.createTable.Name = "createTable";
             this.createTable.Size = new System.Drawing.Size(129, 32);
             this.createTable.TabIndex = 0;
@@ -42,7 +42,7 @@
             // 
             // zonaPazienti
             // 
-            this.zonaPazienti.Location = new System.Drawing.Point(470, 24);
+            this.zonaPazienti.Location = new System.Drawing.Point(471, 12);
             this.zonaPazienti.Name = "zonaPazienti";
             this.zonaPazienti.Size = new System.Drawing.Size(95, 32);
             this.zonaPazienti.TabIndex = 1;
@@ -54,9 +54,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 533);
+            this.ClientSize = new System.Drawing.Size(578, 533);
             this.Controls.Add(this.zonaPazienti);
             this.Controls.Add(this.createTable);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";

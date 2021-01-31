@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,79 @@ namespace Gestionale
 {
     public partial class users : Form
     {
+        database db = new database();
+
+        public string[] valori = new string[36];
         public users() {
             InitializeComponent();
+            carica();
+            stampaLista();
         }
 
-        private void label1_Click(object sender, EventArgs e) {
-
+        public void carica() {
+            for (int i = 0; i < 36; i++)
+            {
+                if (i < 10)
+                {
+                    valori[i] = Convert.ToString(i);
+                }
+                else
+                {
+                    valori[i] = Convert.ToString((char)('a' + i - 10));
+                }
+            }
         }
 
-        private void label4_Click(object sender, EventArgs e) {
-
+        public string UUID() {
+            string cu = "";
+            Random rnd = new Random();
+            for (int i = 0; i < 15; i++)
+            {
+                if (cu.Length == 3 || cu.Length == 12)
+                {
+                    cu += "-";
+                }
+                else
+                {
+                    cu += valori[rnd.Next(0, 36)];
+                }
+            }
+            return cu.ToUpper();
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            db.esegui(string.Format("INSERT INTO pazienti(idp, nome, cognome, codiceFiscale, datadinascita, luogodinascita, indirizzo, telefono, cellulare, email) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", UUID(), txtNome.Text, txtCognome.Text, textCF.Text, txtDataDiNascita.Text, txtLuogoDN, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text));
+            stampaLista();
+        }
+
+        private void stampaLista() {
+            string comandosql = "SELECT idp,cognome,nome,codiceFiscale FROM pazienti";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
+                    DataSet ds = new DataSet("tabelle");
+                    da.Fill(ds, "tabella");
+                    datiPazienti.DataSource = ds.Tables["tabella"];
+                    datiPazienti.Refresh();
+                }
+                connessione.Close();
+            }
+        }
+        private void datiPazienti_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.datiPazienti[e.ColumnIndex, e.RowIndex].Value.ToString();
+                ViewUser view = new ViewUser(id);
+                this.Hide();
+                view.ShowDialog();
+                this.Show();
+            }
+        }
+        private void label1_Click(object sender, EventArgs e) {}
+        private void label4_Click(object sender, EventArgs e) {}
+
     }
 }

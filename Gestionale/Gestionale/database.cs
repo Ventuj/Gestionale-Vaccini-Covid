@@ -12,7 +12,7 @@ namespace Gestionale
     {
         public string stringaConnessione = @"Data Source=database.db";
 
-        private void esegui(string comandosql) {
+        public void esegui(string comandosql) {
             using (SQLiteConnection connessione = new SQLiteConnection(stringaConnessione))
             {
                 connessione.Open();
@@ -23,7 +23,6 @@ namespace Gestionale
                 connessione.Close();
             }
         }
-
         public void createTable() {
             try
             {
@@ -31,17 +30,13 @@ namespace Gestionale
                         DROP TABLE IF EXISTS pazienti;
                         CREATE TABLE pazienti (
                           idp TEXT PRIMARY KEY NOT NULL,
-                          idpe TEXT NOT NULL,
+                          idpe TEXT,
                           nome TEXT NOT NULL,
                           cognome TEXT NOT NULL,
                           codiceFiscale TEXT NOT NULL,
                           datadinascita TEXT NOT NULL,
                           luogodinascita TEXT NOT NULL,
                           indirizzo TEXT NOT NULL,
-                          comune TEXT NOT NULL,
-                          provincia TEXT NOT NULL,
-                          regione TEXT NOT NULL,
-                          nazione TEXT NOT NULL,
                           telefono TEXT NOT NULL,
                           cellulare TEXT NOT NULL,
                           email TEXT NOT NULL
