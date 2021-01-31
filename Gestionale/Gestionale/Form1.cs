@@ -15,7 +15,11 @@ namespace Gestionale
     {
         public Form1() {
             InitializeComponent();
-            SQLiteConnection.CreateFile("database.db");
+        }
+
+        private void createTable_Click(object sender, EventArgs e) {
+            database d = new database();
+            d.createTable();
         }
     }
 }
