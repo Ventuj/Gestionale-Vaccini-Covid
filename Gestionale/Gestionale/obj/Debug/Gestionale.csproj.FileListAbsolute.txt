@@ -25,3 +25,6 @@ D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\G
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.ViewUser.resources
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.csproj.CopyComplete
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.users.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.Medici.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.VacciniC.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.VacciniN.resources

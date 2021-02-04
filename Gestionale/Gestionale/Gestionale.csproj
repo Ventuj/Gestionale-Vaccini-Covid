@@ -80,6 +80,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Medici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Medici.Designer.cs">
+      <DependentUpon>Medici.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="users.cs">
@@ -87,6 +93,18 @@
     </Compile>
     <Compile Include="users.Designer.cs">
       <DependentUpon>users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VacciniC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VacciniC.Designer.cs">
+      <DependentUpon>VacciniC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VacciniN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VacciniN.Designer.cs">
+      <DependentUpon>VacciniN.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewUser.cs">
       <SubType>Form</SubType>
@@ -96,6 +114,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medici.resx">
+      <DependentUpon>Medici.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,6 +129,12 @@
     </Compile>
     <EmbeddedResource Include="users.resx">
       <DependentUpon>users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VacciniC.resx">
+      <DependentUpon>VacciniC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VacciniN.resx">
+      <DependentUpon>VacciniN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUser.resx">
       <DependentUpon>ViewUser.cs</DependentUpon>

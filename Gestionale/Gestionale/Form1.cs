@@ -29,5 +29,21 @@ namespace Gestionale
             u.ShowDialog();
             this.Show();
         }
+
+        // Vaccini
+        private void button2_Click(object sender, EventArgs e) {
+            VacciniN v = new VacciniN();
+            this.Hide();
+            v.ShowDialog();
+            this.Show();
+        }
+
+        //medici
+        private void button1_Click(object sender, EventArgs e) {
+            Medici m = new Medici();
+            this.Hide();
+            m.ShowDialog();
+            this.Show();
+        }
     }
 }
