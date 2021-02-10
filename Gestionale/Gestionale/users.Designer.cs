@@ -263,6 +263,7 @@
             this.Name = "users";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Utenti";
+            this.Load += new System.EventHandler(this.users_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datiPazienti)).EndInit();

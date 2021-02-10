@@ -23,6 +23,21 @@ namespace Gestionale
                 connessione.Close();
             }
         }
+
+        public int rowCount(string comandosql) {
+            int row = 0;
+            using (SQLiteConnection connessione = new SQLiteConnection(stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    row = Convert.ToInt32(comando.ExecuteScalar());
+                }
+                connessione.Close();
+            }
+            return row;
+        }
+
         public void createTable() {
             try
             {
@@ -61,11 +76,6 @@ namespace Gestionale
                           datadinascita TEXT NOT NULL,
                           luogodinascita TEXT NOT NULL,
                           indirizzo TEXT NOT NULL,
-                          comune TEXT NOT NULL,
-                          provincia TEXT NOT NULL,
-                          regione TEXT NOT NULL,
-                          nazione TEXT NOT NULL,
-                          telefono TEXT NOT NULL,
                           cellulare TEXT NOT NULL,
                           email TEXT NOT NULL
                         );
