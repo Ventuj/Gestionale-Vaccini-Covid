@@ -8,10 +8,6 @@ CREATE TABLE pazienti (
   datadinascita TEXT NOT NULL,
   luogodinascita TEXT NOT NULL,
   indirizzo TEXT NOT NULL,
-  comune TEXT NOT NULL,
-  provincia TEXT NOT NULL,
-  regione TEXT NOT NULL,
-  nazione TEXT NOT NULL,
   telefono TEXT NOT NULL,
   cellulare TEXT NOT NULL,
   email TEXT NOT NULL
@@ -36,11 +32,6 @@ CREATE TABLE personale (
   datadinascita TEXT NOT NULL,
   luogodinascita TEXT NOT NULL,
   indirizzo TEXT NOT NULL,
-  comune TEXT NOT NULL,
-  provincia TEXT NOT NULL,
-  regione TEXT NOT NULL,
-  nazione TEXT NOT NULL,
-  telefono TEXT NOT NULL,
   cellulare TEXT NOT NULL,
   email TEXT NOT NULL
 );
