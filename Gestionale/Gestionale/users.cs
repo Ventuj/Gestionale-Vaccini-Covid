@@ -52,7 +52,6 @@ namespace Gestionale
             }
             return cu.ToUpper();
         }
-
         private void button1_Click(object sender, EventArgs e) {
             if(txtNome.Text != "" && txtCognome.Text != "" && textCF.Text != "" && txtDataDiNascita.Text != "" && txtLuogoDN.Text != "" && txtIndirizzo.Text != "" && txtTel.Text != "" && txtCel.Text != "" && txtEmail.Text != "")
             {

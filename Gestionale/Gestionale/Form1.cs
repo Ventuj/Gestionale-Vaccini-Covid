@@ -30,7 +30,7 @@ namespace Gestionale
             this.Show();
         }
 
-        // Vaccini
+        // Vaccini normali
         private void button2_Click(object sender, EventArgs e) {
             VacciniN v = new VacciniN();
             this.Hide();
@@ -41,6 +41,14 @@ namespace Gestionale
         //medici
         private void button1_Click(object sender, EventArgs e) {
             Medici m = new Medici();
+            this.Hide();
+            m.ShowDialog();
+            this.Show();
+        }
+
+        // vaccini covid
+        private void button3_Click(object sender, EventArgs e) {
+            VacciniC m = new VacciniC();
             this.Hide();
             m.ShowDialog();
             this.Show();

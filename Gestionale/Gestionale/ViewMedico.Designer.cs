@@ -1,6 +1,6 @@
 ﻿namespace Gestionale
 {
-    partial class VacciniN
+    partial class ViewMedico
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,15 @@
         private void InitializeComponent() {
             this.SuspendLayout();
             // 
-            // VacciniN
+            // ViewMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 533);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "VacciniN";
+            this.Name = "ViewMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VacciniN";
+            this.Text = "ViewMedico";
             this.ResumeLayout(false);
 
         }

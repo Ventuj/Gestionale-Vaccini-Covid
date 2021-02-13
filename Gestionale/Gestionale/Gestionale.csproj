@@ -106,6 +106,12 @@
     <Compile Include="VacciniN.Designer.cs">
       <DependentUpon>VacciniN.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMedico.Designer.cs">
+      <DependentUpon>ViewMedico.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VacciniN.resx">
       <DependentUpon>VacciniN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMedico.resx">
+      <DependentUpon>ViewMedico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUser.resx">
       <DependentUpon>ViewUser.cs</DependentUpon>
