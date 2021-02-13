@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,12 @@ namespace Gestionale
 {
     public partial class VacciniC : Form
     {
+        database db = new database();
+
+        public string[] valori = new string[36];
         public VacciniC() {
             InitializeComponent();
+
         }
     }
 }

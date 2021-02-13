@@ -59,7 +59,7 @@
             this.button1.Location = new System.Drawing.Point(194, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 38);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 10;
             this.button1.Text = "Aggiungi Paziente";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -88,21 +88,21 @@
             this.txtNome.Location = new System.Drawing.Point(7, 44);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(100, 22);
-            this.txtNome.TabIndex = 3;
+            this.txtNome.TabIndex = 1;
             // 
             // txtCognome
             // 
             this.txtCognome.Location = new System.Drawing.Point(113, 44);
             this.txtCognome.Name = "txtCognome";
             this.txtCognome.Size = new System.Drawing.Size(100, 22);
-            this.txtCognome.TabIndex = 4;
+            this.txtCognome.TabIndex = 2;
             // 
             // textCF
             // 
             this.textCF.Location = new System.Drawing.Point(219, 44);
             this.textCF.Name = "textCF";
             this.textCF.Size = new System.Drawing.Size(100, 22);
-            this.textCF.TabIndex = 5;
+            this.textCF.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -137,7 +137,7 @@
             this.txtIndirizzo.Location = new System.Drawing.Point(325, 44);
             this.txtIndirizzo.Name = "txtIndirizzo";
             this.txtIndirizzo.Size = new System.Drawing.Size(100, 22);
-            this.txtIndirizzo.TabIndex = 20;
+            this.txtIndirizzo.TabIndex = 4;
             // 
             // label9
             // 
@@ -162,7 +162,7 @@
             this.txtLuogoDN.Location = new System.Drawing.Point(368, 101);
             this.txtLuogoDN.Name = "txtLuogoDN";
             this.txtLuogoDN.Size = new System.Drawing.Size(100, 22);
-            this.txtLuogoDN.TabIndex = 16;
+            this.txtLuogoDN.TabIndex = 9;
             // 
             // label7
             // 
@@ -179,7 +179,7 @@
             this.txtDataDiNascita.Location = new System.Drawing.Point(262, 101);
             this.txtDataDiNascita.Name = "txtDataDiNascita";
             this.txtDataDiNascita.Size = new System.Drawing.Size(100, 22);
-            this.txtDataDiNascita.TabIndex = 14;
+            this.txtDataDiNascita.TabIndex = 8;
             // 
             // label6
             // 
@@ -195,7 +195,7 @@
             this.txtEmail.Location = new System.Drawing.Point(431, 44);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(100, 22);
-            this.txtEmail.TabIndex = 12;
+            this.txtEmail.TabIndex = 5;
             // 
             // label5
             // 
@@ -211,7 +211,7 @@
             this.txtCel.Location = new System.Drawing.Point(156, 101);
             this.txtCel.Name = "txtCel";
             this.txtCel.Size = new System.Drawing.Size(100, 22);
-            this.txtCel.TabIndex = 9;
+            this.txtCel.TabIndex = 7;
             // 
             // label4
             // 
@@ -228,7 +228,7 @@
             this.txtTel.Location = new System.Drawing.Point(50, 101);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(100, 22);
-            this.txtTel.TabIndex = 7;
+            this.txtTel.TabIndex = 6;
             // 
             // label3
             // 

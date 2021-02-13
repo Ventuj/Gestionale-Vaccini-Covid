@@ -57,7 +57,7 @@ namespace Gestionale
             {
                 if (db.rowCount(string.Format("SELECT COUNT(*) FROM pazienti WHERE codiceFiscale = '{0}'", textCF.Text)) == 0)
                 {
-                    db.esegui(string.Format("INSERT INTO pazienti(idp, nome, cognome, codiceFiscale, datadinascita, luogodinascita, indirizzo, telefono, cellulare, email) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", UUID(), txtNome.Text, txtCognome.Text, textCF.Text, txtDataDiNascita.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text));
+                    db.esegui(string.Format("INSERT INTO pazienti(idp, nome, cognome, codiceFiscale, datadinascita, luogodinascita, indirizzo, telefono, cellulare, email) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", UUID(), txtNome.Text, txtCognome.Text, textCF.Text, db.converter(txtDataDiNascita.Text), txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text));
                     stampaLista();
                     txtNome.Text = txtCognome.Text = textCF.Text = txtDataDiNascita.Text = txtLuogoDN.Text = txtIndirizzo.Text = txtTel.Text = txtCel.Text = txtEmail.Text = "";
                 }

@@ -38,6 +38,13 @@ namespace Gestionale
             return row;
         }
 
+        public string converter(string str) {
+            string[] st = str.Split('/');
+            DateTime d = new DateTime(Convert.ToInt32(st[2]), Convert.ToInt32(st[1]), Convert.ToInt32(st[0]), 0, 0, 0);
+            long epoch = (d.Ticks - 621355968000000000) / 10000000;
+            return Convert.ToString(epoch);
+        }
+
         public void createTable() {
             try
             {

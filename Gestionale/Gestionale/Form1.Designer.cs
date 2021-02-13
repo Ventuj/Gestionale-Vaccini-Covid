@@ -36,6 +36,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -49,7 +50,7 @@
             this.createTable.Location = new System.Drawing.Point(437, 489);
             this.createTable.Name = "createTable";
             this.createTable.Size = new System.Drawing.Size(129, 32);
-            this.createTable.TabIndex = 0;
+            this.createTable.TabIndex = 8;
             this.createTable.Text = "Crea Tabelle";
             this.createTable.UseVisualStyleBackColor = false;
             this.createTable.Click += new System.EventHandler(this.createTable_Click);
@@ -62,7 +63,7 @@
             this.zonaPazienti.Location = new System.Drawing.Point(121, 33);
             this.zonaPazienti.Name = "zonaPazienti";
             this.zonaPazienti.Size = new System.Drawing.Size(95, 32);
-            this.zonaPazienti.TabIndex = 1;
+            this.zonaPazienti.TabIndex = 2;
             this.zonaPazienti.Text = "Pazienti";
             this.zonaPazienti.UseVisualStyleBackColor = false;
             this.zonaPazienti.Click += new System.EventHandler(this.zonaPazienti_Click);
@@ -75,7 +76,7 @@
             this.button1.Location = new System.Drawing.Point(20, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 32);
-            this.button1.TabIndex = 2;
+            this.button1.TabIndex = 1;
             this.button1.Text = "Medici";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -123,7 +124,7 @@
             this.button3.Location = new System.Drawing.Point(121, 32);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 32);
-            this.button3.TabIndex = 4;
+            this.button3.TabIndex = 5;
             this.button3.Text = "Vaccini Covid";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -136,13 +137,14 @@
             this.button2.Location = new System.Drawing.Point(20, 32);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 32);
-            this.button2.TabIndex = 3;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Vaccini";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Location = new System.Drawing.Point(277, 105);
             this.groupBox3.Name = "groupBox3";
@@ -159,9 +161,21 @@
             this.button5.Location = new System.Drawing.Point(17, 32);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(95, 32);
-            this.button5.TabIndex = 3;
+            this.button5.TabIndex = 6;
             this.button5.Text = "Strutture";
             this.button5.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(118, 32);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(95, 32);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "Studi Medici";
+            this.button6.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -195,6 +209,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
 
