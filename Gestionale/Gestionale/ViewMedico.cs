@@ -14,6 +14,7 @@ namespace Gestionale
     {
         database db = new database();
         string nome, cognome, idpe, indirizzo, luogodinascita, cellulare, email, codicefiscale = "";
+
         public ViewMedico(string id) {
             InitializeComponent();
             idpe = id;
@@ -28,6 +29,9 @@ namespace Gestionale
             cellulare = Convert.ToString(db.getData(string.Format("SELECT cellulare FROM personale WHERE idpe = '{0}'", idpe)));
             email = Convert.ToString(db.getData(string.Format("SELECT email FROM personale WHERE idpe = '{0}'", idpe)));
             codicefiscale = Convert.ToString(db.getData(string.Format("SELECT codiceFiscale FROM personale WHERE idpe = '{0}'", idpe)));
+        }
+        private void button1_Click(object sender, EventArgs e) {
+
         }
 
         private void ViewMedico_Load(object sender, EventArgs e) {

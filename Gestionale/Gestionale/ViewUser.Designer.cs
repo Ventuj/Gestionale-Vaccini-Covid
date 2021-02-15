@@ -62,8 +62,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datiPazienti)).BeginInit();
@@ -424,33 +422,11 @@
             this.button3.Text = "Aggiungi";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(571, 428);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 20);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "nome-cognome";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(571, 463);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(124, 20);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "nome-cognome";
-            // 
             // ViewUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 636);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -498,8 +474,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridView datiPazienti;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DateTimePicker dataSomm;

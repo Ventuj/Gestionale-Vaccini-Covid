@@ -53,5 +53,12 @@ namespace Gestionale
             m.ShowDialog();
             this.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e) {
+            Strutture s = new Strutture();
+            this.Hide();
+            s.ShowDialog();
+            this.Show();
+        }
     }
 }

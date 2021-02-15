@@ -74,17 +74,7 @@ namespace Gestionale
         private void button1_Click(object sender, EventArgs e) {
             if (txtNome.Text != "" && txtCognome.Text != "" && textCF.Text != "" && txtLuogoDN.Text != "" && txtIndirizzo.Text != "" && txtTel.Text != "" && txtCel.Text != "" && txtEmail.Text != "")
             {
-                db.esegui(string.Format(@"UPDATE pazienti SET 
-                                            nome = '{0}', 
-                                            cognome = '{1}', 
-                                            codiceFiscale = '{2}',
-                                            luogodinascita = '{3}',
-                                            indirizzo = '{4}',
-                                            telefono = '{5}', 
-                                            cellulare = '{6}', 
-                                            email = '{7}' 
-                                            WHERE idp = '{8}'", 
-                                            txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text, idp));
+                db.esegui(string.Format(@"UPDATE pazienti SET nome = '{0}', cognome = '{1}', codiceFiscale = '{2}',luogodinascita = '{3}',indirizzo = '{4}',telefono = '{5}', cellulare = '{6}', email = '{7}' WHERE idp = '{8}'", txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text, idp));
             }
         }
 
@@ -103,7 +93,6 @@ namespace Gestionale
             string cmd = "SELECT * FROM vaccini";
             comboBox1.DisplayMember = "Text";
             comboBox1.ValueMember = "Value";
-
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
@@ -124,7 +113,6 @@ namespace Gestionale
             if (comboBox1.Text != "" && txtLotto.Text != "" && txtDose.Text != "")
             {
                 ComboboxItem c = (ComboboxItem)comboBox1.SelectedItem;
-                label7.Text = c.Text.ToString();
                 string idv = c.Value.ToString();
                 db.esegui(string.Format("INSERT INTO vacciniPazienti(idv, idp, data, datascadenza, lotto, dataproduzione, dose, idrVP) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}' , '{7}')", idv, idp, db.converter(dataSomm.Text), db.converter(dataScad.Text), txtLotto.Text, db.converter(dataProd.Text), txtDose.Text, UUID()));
                 stampaTabellaVaccini();
