@@ -95,6 +95,7 @@ namespace Gestionale
                 ViewUser view = new ViewUser(id);
                 this.Hide();
                 view.ShowDialog();
+                stampaLista();
                 this.Show();
             }
         }

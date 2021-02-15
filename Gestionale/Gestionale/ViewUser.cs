@@ -59,18 +59,6 @@ namespace Gestionale
         }
 
         private void datiPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
-            /*
-            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {
-                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
-                DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    db.esegui(string.Format("DELETE FROM vacciniPazienti WHERE idrVP = '{0}'", id));
-                    stampaTabellaVaccini();
-                }
-            }
-             */
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
@@ -83,15 +71,32 @@ namespace Gestionale
             }
         }
 
+        private void button1_Click(object sender, EventArgs e) {
+            if (txtNome.Text != "" && txtCognome.Text != "" && textCF.Text != "" && txtLuogoDN.Text != "" && txtIndirizzo.Text != "" && txtTel.Text != "" && txtCel.Text != "" && txtEmail.Text != "")
+            {
+                db.esegui(string.Format(@"UPDATE pazienti SET 
+                                            nome = '{0}', 
+                                            cognome = '{1}', 
+                                            codiceFiscale = '{2}',
+                                            luogodinascita = '{3}',
+                                            indirizzo = '{4}',
+                                            telefono = '{5}', 
+                                            cellulare = '{6}', 
+                                            email = '{7}' 
+                                            WHERE idp = '{8}'", 
+                                            txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text, idp));
+            }
+        }
+
         private void caricaDati() {
-            nome = Convert.ToString(db.getData(string.Format("SELECT nome FROM pazienti WHERE idp = '{0}'", idp)));
-            cognome = Convert.ToString(db.getData(string.Format("SELECT cognome FROM pazienti WHERE idp = '{0}'", idp)));
-            indirizzo = Convert.ToString(db.getData(string.Format("SELECT indirizzo FROM pazienti WHERE idp = '{0}'", idp)));
-            luogodinascita = Convert.ToString(db.getData(string.Format("SELECT luogodinascita FROM pazienti WHERE idp = '{0}'", idp)));
-            cellulare = Convert.ToString(db.getData(string.Format("SELECT cellulare FROM pazienti WHERE idp = '{0}'", idp)));
-            telefono = Convert.ToString(db.getData(string.Format("SELECT telefono FROM pazienti WHERE idp = '{0}'", idp)));
-            email = Convert.ToString(db.getData(string.Format("SELECT email FROM pazienti WHERE idp = '{0}'", idp)));
-            codicefiscale = Convert.ToString(db.getData(string.Format("SELECT codiceFiscale FROM pazienti WHERE idp = '{0}'", idp)));
+            nome = txtNome.Text = Convert.ToString(db.getData(string.Format("SELECT nome FROM pazienti WHERE idp = '{0}'", idp)));
+            cognome = txtCognome.Text = Convert.ToString(db.getData(string.Format("SELECT cognome FROM pazienti WHERE idp = '{0}'", idp)));
+            indirizzo = txtIndirizzo.Text = Convert.ToString(db.getData(string.Format("SELECT indirizzo FROM pazienti WHERE idp = '{0}'", idp)));
+            luogodinascita = txtLuogoDN.Text = Convert.ToString(db.getData(string.Format("SELECT luogodinascita FROM pazienti WHERE idp = '{0}'", idp)));
+            cellulare = txtCel.Text = Convert.ToString(db.getData(string.Format("SELECT cellulare FROM pazienti WHERE idp = '{0}'", idp)));
+            telefono = txtTel.Text = Convert.ToString(db.getData(string.Format("SELECT telefono FROM pazienti WHERE idp = '{0}'", idp)));
+            email = txtEmail.Text = Convert.ToString(db.getData(string.Format("SELECT email FROM pazienti WHERE idp = '{0}'", idp)));
+            codicefiscale = textCF.Text = Convert.ToString(db.getData(string.Format("SELECT codiceFiscale FROM pazienti WHERE idp = '{0}'", idp)));
         }
 
         private void fillComboVaccini() {
