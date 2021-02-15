@@ -127,6 +127,7 @@ namespace Gestionale
 
                         DROP TABLE IF EXISTS vacciniPazienti;
                         CREATE TABLE vacciniPazienti (
+                          idrVP TEXT PRIMARY KEY NOT NULL,
                           idv TEXT NOT NULL,
                           idp TEXT NOT NULL,
                           data TEXT NOT NULL,

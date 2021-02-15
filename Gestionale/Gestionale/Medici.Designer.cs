@@ -92,7 +92,7 @@
             this.groupBox1.Size = new System.Drawing.Size(554, 194);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Aggiungi Paziente";
+            this.groupBox1.Text = "Aggiungi Medico";
             // 
             // label4
             // 
@@ -266,7 +266,7 @@
             this.ClientSize = new System.Drawing.Size(578, 577);
             this.Controls.Add(this.datiPazienti);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Medici";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Medici";
