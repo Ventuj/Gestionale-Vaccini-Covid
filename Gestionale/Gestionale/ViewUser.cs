@@ -14,7 +14,6 @@ namespace Gestionale
     public partial class ViewUser : Form
     {
         database db = new database();
-
         string nome, cognome, idp, indirizzo, luogodinascita, cellulare, telefono, email, codicefiscale = "";
         public ViewUser(string id) {
             InitializeComponent();
