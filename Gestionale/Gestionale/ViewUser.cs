@@ -15,6 +15,11 @@ namespace Gestionale
     {
         database db = new database();
         string nome, cognome, idp, indirizzo, luogodinascita, cellulare, telefono, email, codicefiscale = "";
+
+        private void label7_Click(object sender, EventArgs e) {
+
+        }
+
         public ViewUser(string id) {
             InitializeComponent();
             idp = id;
