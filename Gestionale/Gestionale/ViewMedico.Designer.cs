@@ -37,6 +37,7 @@
             this.Name = "ViewMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewMedico";
+            this.Load += new System.EventHandler(this.ViewMedico_Load);
             this.ResumeLayout(false);
 
         }

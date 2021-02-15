@@ -91,7 +91,7 @@ namespace Gestionale
         private void datiPazienti_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
-                string id = this.datiPazienti[e.ColumnIndex, e.RowIndex].Value.ToString();
+                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
                 ViewUser view = new ViewUser(id);
                 this.Hide();
                 view.ShowDialog();

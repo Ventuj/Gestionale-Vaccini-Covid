@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,20 @@ namespace Gestionale
             DateTime d = new DateTime(Convert.ToInt32(st[2]), Convert.ToInt32(st[1]), Convert.ToInt32(st[0]), 0, 0, 0);
             long epoch = (d.Ticks - 621355968000000000) / 10000000;
             return Convert.ToString(epoch);
+        }
+
+        public string getData(string cmd) {
+            var variabile = "";
+            using (SQLiteConnection connessione = new SQLiteConnection(stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(cmd, connessione))
+                {
+                    variabile = Convert.ToString(comando.ExecuteScalar());
+                }
+                connessione.Close();
+            }
+            return variabile;
         }
 
         public void createTable() {
