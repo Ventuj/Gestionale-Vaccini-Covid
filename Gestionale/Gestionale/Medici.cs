@@ -101,5 +101,17 @@ namespace Gestionale
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+
+        private void datiPazienti_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                ViewMedico view = new ViewMedico(id);
+                this.Hide();
+                view.ShowDialog();
+                stampaLista();
+                this.Show();
+            }
+        }
     }
 }

@@ -65,6 +65,7 @@
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 346);
             this.datiPazienti.TabIndex = 10;
+            this.datiPazienti.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datiPazienti_CellClick);
             // 
             // groupBox1
             // 
