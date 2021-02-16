@@ -20,7 +20,8 @@ namespace Gestionale
             idpe = id;
             caricaDati();
             label1.Text = cognome + " " + nome;
-            checkStudio();
+            checkST();
+            controlloOP();
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -47,10 +48,6 @@ namespace Gestionale
             }
         }
 
-        private void ViewMedico_Load(object sender, EventArgs e) {
-
-        }
-
         private bool checkOP() {
             if (db.rowCount(string.Format("SELECT COUNT(*) FROM operatori WHERE idpe = '{0}'", idpe)) > 0)
             {
@@ -63,18 +60,67 @@ namespace Gestionale
             }
         }
 
-        private void checkStudio() {
+        private bool checkStudio() {
             if (db.rowCount(string.Format("SELECT COUNT(*) FROM studioPersonale WHERE idpe = '{0}'", idpe)) > 0)
             {
                 idst = Convert.ToString(db.getData(string.Format("SELECT idst FROM studioPersonale WHERE idpe = '{0}'", idpe)));
-                label4.Text = "";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void controlloOP() {
+            if (checkOP())
+            {
+                button2.Visible = false;
+                button4.Visible = true;
+            }
+            else
+            {
+                if (checkStudio())
+                {
+                    button2.Visible = button4.Visible = false;
+                }
+                else
+                {
+                    button4.Visible = false;
+                }
+            }
+        }
+
+        private void checkST() {
+            if (checkStudio())
+            {
+                label4.Text = "Questa persona è associata ad uno studio medico";
                 button3.Visible = true;
             }
             else
             {
-                label4.Text = "Studio medico non trovato";
-                button3.Visible = false;
+                if (checkOP())
+                {
+                    label4.Text = "Questa persona è un operatore Covid";
+                    button3.Visible = false;
+                }
+                else
+                {
+                    label4.Text = "Studio medico non trovato";
+                    button3.Visible = false;
+                }
             }
+        }
+
+        // Visualizza operatori Covid
+        private void button4_Click(object sender, EventArgs e) {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            db.esegui(string.Format("INSERT INTO operatori(idop, idpe) VALUES('{0}', '{1}') ",db.UUID(15, 7,10), idpe));
+            checkST();
+            controlloOP();
         }
     }
 }

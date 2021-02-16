@@ -34,7 +34,7 @@ namespace Gestionale
         }
 
         private void caricaListaMediciCompleta() {
-            string comandosql = "SELECT cognome, nome, idpe FROM personale WHERE idpe NOT IN (SELECT idpe FROM studioPersonale)";
+            string comandosql = "SELECT cognome, nome, idpe FROM personale WHERE idpe NOT IN (SELECT idpe FROM studioPersonale) AND idpe NOT IN (SELECT idpe FROM operatori)";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
