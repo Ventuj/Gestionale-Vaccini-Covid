@@ -60,12 +60,13 @@
             this.datiPazienti.Location = new System.Drawing.Point(12, 219);
             this.datiPazienti.Name = "datiPazienti";
             this.datiPazienti.ReadOnly = true;
+            this.datiPazienti.RowHeadersVisible = false;
             this.datiPazienti.RowHeadersWidth = 51;
             this.datiPazienti.RowTemplate.Height = 24;
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 346);
             this.datiPazienti.TabIndex = 10;
-            this.datiPazienti.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datiPazienti_CellClick);
+            this.datiPazienti.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellClick);
             // 
             // groupBox1
             // 

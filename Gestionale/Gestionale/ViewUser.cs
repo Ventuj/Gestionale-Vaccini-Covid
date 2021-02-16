@@ -59,22 +59,28 @@ namespace Gestionale
         }
 
         private void datiPazienti_CellDoubleClick(object sender, DataGridViewCellEventArgs e) {
-            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {
-                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
-                DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    db.esegui(string.Format("DELETE FROM vacciniPazienti WHERE idrVP = '{0}'", id));
-                    stampaTabellaVaccini();
-                }
-            }
+
         }
 
         private void button1_Click(object sender, EventArgs e) {
             if (txtNome.Text != "" && txtCognome.Text != "" && textCF.Text != "" && txtLuogoDN.Text != "" && txtIndirizzo.Text != "" && txtTel.Text != "" && txtCel.Text != "" && txtEmail.Text != "")
             {
                 db.esegui(string.Format(@"UPDATE pazienti SET nome = '{0}', cognome = '{1}', codiceFiscale = '{2}',luogodinascita = '{3}',indirizzo = '{4}',telefono = '{5}', cellulare = '{6}', email = '{7}' WHERE idp = '{8}'", txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text, idp));
+            }
+        }
+
+        private void datiPazienti_CellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) { 
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                        string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                        DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            db.esegui(string.Format("DELETE FROM vacciniPazienti WHERE idrVP = '{0}'", id));
+                            stampaTabellaVaccini();
+                        }
+                 }
             }
         }
 

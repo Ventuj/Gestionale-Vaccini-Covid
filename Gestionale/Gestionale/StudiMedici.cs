@@ -29,6 +29,7 @@ namespace Gestionale
                 if (db.rowCount(string.Format("SELECT COUNT(*) FROM studiomedico WHERE email = '{0}' AND indirizzo = '{1}' AND telefono = '{2}'", txtEmail.Text, txtIndirizzo.Text, txtTelefono.Text)) == 0)
                 {
                     db.esegui(string.Format("INSERT INTO studiomedico(idst, telefono, email, indirizzo) VALUES('{0}', '{1}', '{2}', '{3}')", db.UUID(18, 5, 16), txtTelefono.Text, txtEmail.Text, txtIndirizzo.Text));
+                    txtEmail.Text = txtIndirizzo.Text = txtTelefono.Text = "";
                     stampaLista();
                 }
                 else

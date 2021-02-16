@@ -246,12 +246,13 @@
             this.datiPazienti.Location = new System.Drawing.Point(12, 219);
             this.datiPazienti.Name = "datiPazienti";
             this.datiPazienti.ReadOnly = true;
+            this.datiPazienti.RowHeadersVisible = false;
             this.datiPazienti.RowHeadersWidth = 51;
             this.datiPazienti.RowTemplate.Height = 24;
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 346);
             this.datiPazienti.TabIndex = 8;
-            this.datiPazienti.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseDown);
+            this.datiPazienti.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseDoubleClick);
             // 
             // users
             // 

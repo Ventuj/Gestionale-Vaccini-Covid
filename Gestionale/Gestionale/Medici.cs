@@ -69,7 +69,7 @@ namespace Gestionale
 
         }
 
-        private void datiPazienti_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private void datiPazienti_CellClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();

@@ -371,12 +371,13 @@
             this.datiPazienti.Location = new System.Drawing.Point(7, 178);
             this.datiPazienti.Name = "datiPazienti";
             this.datiPazienti.ReadOnly = true;
+            this.datiPazienti.RowHeadersVisible = false;
             this.datiPazienti.RowHeadersWidth = 51;
             this.datiPazienti.RowTemplate.Height = 24;
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(413, 172);
             this.datiPazienti.TabIndex = 12;
-            this.datiPazienti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datiPazienti_CellDoubleClick);
+            this.datiPazienti.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellDoubleClick);
             // 
             // comboBox1
             // 
@@ -415,7 +416,7 @@
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(154, 189);
+            this.button3.Location = new System.Drawing.Point(307, 134);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 38);
             this.button3.TabIndex = 10;

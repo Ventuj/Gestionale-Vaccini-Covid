@@ -56,7 +56,8 @@ namespace Gestionale
                 connessione.Close();
             }
         }
-        private void datiPazienti_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) {
+
+        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
