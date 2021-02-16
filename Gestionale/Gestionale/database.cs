@@ -106,15 +106,15 @@ namespace Gestionale
                         CREATE TABLE studioPersonale (
                           idst TEXT NOT NULL,
                           idpe TEXT NOT NULL,
-                          FOREIGN KEY (idst) REFERENCES studiomedico(idst),
-                          FOREIGN KEY (idpe) REFERENCES personale(idpe)
+                          FOREIGN KEY (idst) REFERENCES studiomedico(idst) ON DELETE CASCADE,
+                          FOREIGN KEY (idpe) REFERENCES personale(idpe) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS operatori;
                         CREATE TABLE operatori (
                           idop TEXT PRIMARY KEY NOT NULL,
                           idpe TEXT NOT NULL,
-                          FOREIGN KEY (idpe) REFERENCES personale(idpe)
+                          FOREIGN KEY (idpe) REFERENCES personale(idpe) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS vaccini;
@@ -135,8 +135,8 @@ namespace Gestionale
                           lotto TEXT NOT NULL,
                           dataproduzione TEXT NOT NULL,
                           dose TEXT NOT NULL,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp),
-                          FOREIGN KEY (idv) REFERENCES vaccini(idv)
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE,
+                          FOREIGN KEY (idv) REFERENCES vaccini(idv) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS strutture;
@@ -154,8 +154,8 @@ namespace Gestionale
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids),
-                          FOREIGN KEY (idop) REFERENCES operatori(idop)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
+                          FOREIGN KEY (idop) REFERENCES operatori(idop) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS orelavorate;
@@ -164,8 +164,8 @@ namespace Gestionale
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids),
-                          FOREIGN KEY (idop) REFERENCES operatori(idop)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
+                          FOREIGN KEY (idop) REFERENCES operatori(idop) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS spedizioni;
@@ -174,14 +174,14 @@ namespace Gestionale
                           datap TEXT NOT NULL,
                           datac TEXT NOT NULL,
                           quantita INTEGER NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS scorte;
                         CREATE TABLE scorte (
                           ids TEXT NOT NULL,
                           quantita INTEGER NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS vaccinoCovid;
@@ -194,10 +194,10 @@ namespace Gestionale
                           lotto TEXT NOT NULL,
                           dataproduzione TEXT NOT NULL,
                           dose TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids),
-                          FOREIGN KEY (idop) REFERENCES operatori(idop),
-                          FOREIGN KEY (idp) REFERENCES personale(idpe),
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
+                          FOREIGN KEY (idop) REFERENCES operatori(idop) ON DELETE CASCADE,
+                          FOREIGN KEY (idp) REFERENCES personale(idpe) ON DELETE CASCADE,
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS prenotazioniCovid;
@@ -207,8 +207,8 @@ namespace Gestionale
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids),
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp)
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS effettiCollaterali;
@@ -216,7 +216,7 @@ namespace Gestionale
                           idp TEXT NOT NULL,
                           data TEXT NOT NULL,
                           descrizione TEXT NOT NULL,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp)
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS orari;
@@ -224,8 +224,8 @@ namespace Gestionale
                           id TEXT NOT NULL,
                           orario TEXT NOT NULL,
                           giorno INTEGER NOT NULL,
-                          FOREIGN KEY (id) REFERENCES studiomedico(idst),
-                          FOREIGN KEY (id) REFERENCES strutture(ids)
+                          FOREIGN KEY (id) REFERENCES studiomedico(idst) ON DELETE CASCADE,
+                          FOREIGN KEY (id) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS InAttesa;
@@ -233,7 +233,7 @@ namespace Gestionale
                           idp TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp)
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );");
             }
             catch (Exception ex)
