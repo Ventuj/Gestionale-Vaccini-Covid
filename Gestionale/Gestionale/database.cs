@@ -60,6 +60,35 @@ namespace Gestionale
             return variabile;
         }
 
+        public string UUID(int l, int s, int e) {
+            string cu = "";
+            string[] valori = new string[36];
+            Random rnd = new Random();
+            for (int i = 0; i < 36; i++)
+            {
+                if (i < 10)
+                {
+                    valori[i] = Convert.ToString(i);
+                }
+                else
+                {
+                    valori[i] = Convert.ToString((char)('a' + i - 10));
+                }
+            }
+            for (int i = 0; i < l; i++)
+            {
+                if (cu.Length == s || cu.Length == e)
+                {
+                    cu += "-";
+                }
+                else
+                {
+                    cu += valori[rnd.Next(0, 36)];
+                }
+            }
+            return cu.ToUpper();
+        }
+
         public void createTable() {
             try
             {
@@ -84,7 +113,6 @@ namespace Gestionale
                           idst TEXT PRIMARY KEY NOT NULL,
                           telefono TEXT NOT NULL,
                           email TEXT NOT NULL,
-                          orari TEXT NOT NULL,
                           indirizzo TEXT NOT NULL
                         );
 

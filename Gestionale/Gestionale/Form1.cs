@@ -53,9 +53,16 @@ namespace Gestionale
             m.ShowDialog();
             this.Show();
         }
-
+        // strutture
         private void button5_Click(object sender, EventArgs e) {
             Strutture s = new Strutture();
+            this.Hide();
+            s.ShowDialog();
+            this.Show();
+        }
+        // studi medici
+        private void button6_Click(object sender, EventArgs e) {
+            StudiMedici s = new StudiMedici();
             this.Hide();
             s.ShowDialog();
             this.Show();

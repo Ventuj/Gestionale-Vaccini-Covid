@@ -95,6 +95,12 @@
     <Compile Include="Strutture.Designer.cs">
       <DependentUpon>Strutture.cs</DependentUpon>
     </Compile>
+    <Compile Include="StudiMedici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudiMedici.Designer.cs">
+      <DependentUpon>StudiMedici.cs</DependentUpon>
+    </Compile>
     <Compile Include="users.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </Compile>
     <EmbeddedResource Include="Strutture.resx">
       <DependentUpon>Strutture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudiMedici.resx">
+      <DependentUpon>StudiMedici.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="users.resx">
       <DependentUpon>users.cs</DependentUpon>

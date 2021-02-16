@@ -15,42 +15,9 @@ namespace Gestionale
     {
         database db = new database();
 
-        public string[] valori = new string[36];
         public Medici() {
             InitializeComponent();
-            carica();
             stampaLista();
-        }
-
-        public void carica() {
-            for (int i = 0; i < 36; i++)
-            {
-                if (i < 10)
-                {
-                    valori[i] = Convert.ToString(i);
-                }
-                else
-                {
-                    valori[i] = Convert.ToString((char)('a' + i - 10));
-                }
-            }
-        }
-
-        public string UUID() {
-            string cu = "";
-            Random rnd = new Random();
-            for (int i = 0; i < 15; i++)
-            {
-                if (cu.Length == 3 || cu.Length == 12)
-                {
-                    cu += "-";
-                }
-                else
-                {
-                    cu += valori[rnd.Next(0, 36)];
-                }
-            }
-            return cu.ToUpper();
         }
 
         private void Medici_Load(object sender, EventArgs e) {
@@ -83,7 +50,7 @@ namespace Gestionale
             {
                 if (db.rowCount(string.Format("SELECT COUNT(*) FROM personale WHERE codiceFiscale = '{0}'", textCF.Text)) == 0)
                 {
-                    db.esegui(string.Format("INSERT INTO personale(idpe, tipo, nome, cognome, codiceFiscale, datadinascita, luogodinascita, indirizzo, cellulare, email) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", UUID(), comboBox1.Text, txtNome.Text, txtCognome.Text, textCF.Text, db.converter(txtDataDiNascita.Text), txtLuogoDN.Text, txtIndirizzo.Text, txtCel.Text, txtEmail.Text));
+                    db.esegui(string.Format("INSERT INTO personale(idpe, tipo, nome, cognome, codiceFiscale, datadinascita, luogodinascita, indirizzo, cellulare, email) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", db.UUID(16, 4, 11), comboBox1.Text, txtNome.Text, txtCognome.Text, textCF.Text, db.converter(txtDataDiNascita.Text), txtLuogoDN.Text, txtIndirizzo.Text, txtCel.Text, txtEmail.Text));
                     stampaLista();
                     txtNome.Text = txtCognome.Text = textCF.Text = txtDataDiNascita.Text = txtLuogoDN.Text = txtIndirizzo.Text = txtCel.Text = txtEmail.Text = "";
                 }

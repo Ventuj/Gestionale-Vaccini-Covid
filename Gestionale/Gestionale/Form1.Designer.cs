@@ -158,12 +158,13 @@
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(118, 32);
+            this.button6.Location = new System.Drawing.Point(150, 32);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(95, 32);
+            this.button6.Size = new System.Drawing.Size(124, 32);
             this.button6.TabIndex = 7;
             this.button6.Text = "Studi Medici";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -172,7 +173,7 @@
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Location = new System.Drawing.Point(17, 32);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(95, 32);
+            this.button5.Size = new System.Drawing.Size(127, 32);
             this.button5.TabIndex = 6;
             this.button5.Text = "Strutture";
             this.button5.UseVisualStyleBackColor = false;
