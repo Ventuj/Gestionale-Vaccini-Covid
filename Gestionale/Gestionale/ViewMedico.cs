@@ -20,6 +20,15 @@ namespace Gestionale
             idpe = id;
             caricaDati();
             label1.Text = cognome + " " + nome;
+            checkStudio();
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            viewStudioMedico v = new viewStudioMedico(idst);
+            this.Hide();
+            v.ShowDialog();
+            checkStudio();
+            this.Show();
         }
 
         private void caricaDati() {
@@ -54,15 +63,17 @@ namespace Gestionale
             }
         }
 
-        private bool checkStudio() {
+        private void checkStudio() {
             if (db.rowCount(string.Format("SELECT COUNT(*) FROM studioPersonale WHERE idpe = '{0}'", idpe)) > 0)
             {
                 idst = Convert.ToString(db.getData(string.Format("SELECT idst FROM studioPersonale WHERE idpe = '{0}'", idpe)));
-                return true;
+                label4.Text = "";
+                button3.Visible = true;
             }
             else
             {
-                return false;
+                label4.Text = "Studio medico non trovato";
+                button3.Visible = false;
             }
         }
     }

@@ -46,8 +46,11 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -224,21 +227,46 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Location = new System.Drawing.Point(382, 155);
+            this.groupBox2.Location = new System.Drawing.Point(244, 155);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(384, 126);
+            this.groupBox2.Size = new System.Drawing.Size(522, 126);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operatore";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button3);
+            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Location = new System.Drawing.Point(10, 155);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(366, 126);
+            this.groupBox3.Size = new System.Drawing.Size(228, 126);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Studio medico";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "label4";
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(61, 71);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 38);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Vedi studio";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // ViewMedico
             // 
@@ -253,11 +281,13 @@
             this.MaximizeBox = false;
             this.Name = "ViewMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ViewMedico";
+            this.Text = "Personale";
             this.Load += new System.EventHandler(this.ViewMedico_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,5 +315,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button3;
     }
 }

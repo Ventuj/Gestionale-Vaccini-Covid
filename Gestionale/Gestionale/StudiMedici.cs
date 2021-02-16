@@ -61,7 +61,7 @@ namespace Gestionale
             }
         }
 
-        private void datiPazienti_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) {
+        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
@@ -70,7 +70,9 @@ namespace Gestionale
                     DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        db.esegui(string.Format("DELETE FROM studiomedico WHERE idst = '{0}'", id));
+                        db.esegui(string.Format(@"  DELETE FROM studiomedico WHERE idst = '{0}'
+                                                    DELETE FROM studioPersonale WHERE idst = '{0}'
+                                                    DELETE FROM orari WHERE id = '{0}' ", id));
                         stampaLista();
                     }
                 }

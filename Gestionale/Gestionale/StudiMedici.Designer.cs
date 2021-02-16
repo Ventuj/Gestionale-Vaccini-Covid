@@ -125,12 +125,13 @@
             this.datiPazienti.Location = new System.Drawing.Point(12, 140);
             this.datiPazienti.Name = "datiPazienti";
             this.datiPazienti.ReadOnly = true;
+            this.datiPazienti.RowHeadersVisible = false;
             this.datiPazienti.RowHeadersWidth = 51;
             this.datiPazienti.RowTemplate.Height = 24;
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 381);
             this.datiPazienti.TabIndex = 11;
-            this.datiPazienti.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseUp);
+            this.datiPazienti.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseDoubleClick);
             // 
             // StudiMedici
             // 
