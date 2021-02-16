@@ -59,5 +59,28 @@ namespace Gestionale
                 connessione.Close();
             }
         }
+
+        private void datiPazienti_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Right)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM studiomedico WHERE idst = '{0}'", id));
+                        stampaLista();
+                    }
+                }
+                else
+                {
+                    viewStudioMedico v = new viewStudioMedico(id);
+                    this.Hide();
+                    v.ShowDialog();
+                    this.Show();
+                }
+            }
+        }
     }
 }

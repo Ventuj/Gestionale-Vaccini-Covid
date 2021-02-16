@@ -130,6 +130,7 @@
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 381);
             this.datiPazienti.TabIndex = 11;
+            this.datiPazienti.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseUp);
             // 
             // StudiMedici
             // 
@@ -143,7 +144,6 @@
             this.Name = "StudiMedici";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Studi Medici";
-            this.Load += new System.EventHandler(this.StudiMedici_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datiPazienti)).EndInit();

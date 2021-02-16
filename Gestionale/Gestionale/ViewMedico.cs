@@ -13,7 +13,7 @@ namespace Gestionale
     public partial class ViewMedico : Form
     {
         database db = new database();
-        string nome, cognome, idpe, idop, indirizzo, luogodinascita, cellulare, email, codicefiscale = "";
+        string nome, cognome, idpe, idop, idst, indirizzo, luogodinascita, cellulare, email, codicefiscale = "";
 
         public ViewMedico(string id) {
             InitializeComponent();
@@ -46,6 +46,18 @@ namespace Gestionale
             if (db.rowCount(string.Format("SELECT COUNT(*) FROM operatori WHERE idpe = '{0}'", idpe)) > 0)
             {
                 idop = Convert.ToString(db.getData(string.Format("SELECT idop FROM operatori WHERE idpe = '{0}'", idpe)));
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool checkStudio() {
+            if (db.rowCount(string.Format("SELECT COUNT(*) FROM studioPersonale WHERE idpe = '{0}'", idpe)) > 0)
+            {
+                idst = Convert.ToString(db.getData(string.Format("SELECT idst FROM studioPersonale WHERE idpe = '{0}'", idpe)));
                 return true;
             }
             else

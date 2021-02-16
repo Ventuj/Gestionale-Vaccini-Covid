@@ -56,22 +56,30 @@ namespace Gestionale
                 connessione.Close();
             }
         }
-        private void datiPazienti_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private void datiPazienti_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
-                ViewUser view = new ViewUser(id);
-                this.Hide();
-                view.ShowDialog();
-                stampaLista();
-                this.Show();
+                if (e.Button == MouseButtons.Right)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format(@"
+                                                    DELETE FROM pazienti WHERE idp = '{0}'; 
+                                                    DELETE FROM vacciniPazienti WHERE idp = '{0}'", id));
+                        stampaLista();
+                    }
+                }
+                else
+                {
+                    ViewUser view = new ViewUser(id);
+                    this.Hide();
+                    view.ShowDialog();
+                    stampaLista();
+                    this.Show();
+                }
             }
-        }
-        private void label1_Click(object sender, EventArgs e) {}
-        private void label4_Click(object sender, EventArgs e) {}
-
-        private void users_Load(object sender, EventArgs e) {
-
         }
     }
 }

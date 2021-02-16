@@ -72,7 +72,6 @@
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nome";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -221,7 +220,6 @@
             this.label4.Size = new System.Drawing.Size(64, 17);
             this.label4.TabIndex = 8;
             this.label4.Text = "Telefono";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtTel
             // 
@@ -253,7 +251,7 @@
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datiPazienti.Size = new System.Drawing.Size(554, 346);
             this.datiPazienti.TabIndex = 8;
-            this.datiPazienti.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datiPazienti_CellClick);
+            this.datiPazienti.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseDown);
             // 
             // users
             // 
@@ -267,7 +265,6 @@
             this.Name = "users";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Utenti";
-            this.Load += new System.EventHandler(this.users_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datiPazienti)).EndInit();
