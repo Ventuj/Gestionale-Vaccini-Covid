@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Gestionale
             label1.Text = cognome + " " + nome;
             checkST();
             controlloOP();
+            stampaPazienti();
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -121,6 +123,23 @@ namespace Gestionale
             db.esegui(string.Format("INSERT INTO operatori(idop, idpe) VALUES('{0}', '{1}') ",db.UUID(15, 7,10), idpe));
             checkST();
             controlloOP();
+        }
+
+        private void stampaPazienti() {
+            string comandosql = "SELECT idp, cognome, nome FROM pazienti WHERE idpe = '"+ idpe + "'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
+                    DataSet ds = new DataSet("tabelle");
+                    da.Fill(ds, "tabella");
+                    datiPazienti.DataSource = ds.Tables["tabella"];
+                    datiPazienti.Refresh();
+                }
+                connessione.Close();
+            }
         }
     }
 }

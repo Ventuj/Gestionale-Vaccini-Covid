@@ -70,9 +70,17 @@ namespace Gestionale
         }
 
         private void datiPazienti_CellClick(object sender, DataGridViewCellMouseEventArgs e) {
-            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+            if (e.Button == MouseButtons.Right)
             {
-                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    stampaLista();
+                }
+            }
+            else
+            {
                 ViewMedico view = new ViewMedico(id);
                 this.Hide();
                 view.ShowDialog();
