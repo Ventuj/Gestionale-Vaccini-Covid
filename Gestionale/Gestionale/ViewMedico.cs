@@ -24,6 +24,8 @@ namespace Gestionale
             checkST();
             controlloOP();
             stampaPazienti();
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -139,6 +141,17 @@ namespace Gestionale
                     datiPazienti.Refresh();
                 }
                 connessione.Close();
+            }
+        }
+        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+            if (e.Button == MouseButtons.Left)
+            {
+                ViewUser view = new ViewUser(id);
+                this.Hide();
+                view.ShowDialog();
+                stampaPazienti();
+                this.Show();
             }
         }
     }

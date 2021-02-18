@@ -17,10 +17,8 @@ namespace Gestionale
         public StudiMedici() {
             InitializeComponent();
             stampaLista();
-        }
-
-        private void StudiMedici_Load(object sender, EventArgs e) {
-
+            groupBox1.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void button1_Click(object sender, EventArgs e) {

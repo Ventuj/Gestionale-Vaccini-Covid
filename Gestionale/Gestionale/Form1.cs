@@ -16,6 +16,7 @@ namespace Gestionale
 
         public Form1() {
             InitializeComponent();
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = Color.White;
         }
 
         private void createTable_Click(object sender, EventArgs e) {

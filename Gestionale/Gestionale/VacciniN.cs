@@ -20,6 +20,8 @@ namespace Gestionale
             InitializeComponent();
             carica();
             stampaLista();
+            groupBox1.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void stampaLista() {

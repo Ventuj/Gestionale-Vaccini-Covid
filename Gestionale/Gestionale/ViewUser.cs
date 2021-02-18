@@ -26,6 +26,9 @@ namespace Gestionale
             stampaListaMedici();
             checkMedico();
             label1.Text = cognome + " " + nome;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
+            this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void button1_Click(object sender, EventArgs e) {

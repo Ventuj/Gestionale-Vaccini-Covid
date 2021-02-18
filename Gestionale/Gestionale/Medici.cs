@@ -18,12 +18,9 @@ namespace Gestionale
         public Medici() {
             InitializeComponent();
             stampaLista();
+            groupBox1.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
-
-        private void Medici_Load(object sender, EventArgs e) {
-
-        }
-
 
         private void stampaLista() {
             string comandosql = "SELECT idpe,cognome,nome,codiceFiscale,tipo FROM personale";
