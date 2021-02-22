@@ -68,5 +68,12 @@ namespace Gestionale
             s.ShowDialog();
             this.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e) {
+            Operatori o = new Operatori();
+            this.Hide();
+            o.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -188,6 +188,9 @@
     <EmbeddedResource Include="Medici.resx">
       <DependentUpon>Medici.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Operatori.resx">
+      <DependentUpon>Operatori.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
