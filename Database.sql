@@ -85,8 +85,9 @@
                           idtu TEXT PRIMARY KEY NOT NULL,
                           idop TEXT NOT NULL,
                           ids TEXT NOT NULL,
-                          data TEXT NOT NULL,
-                          ora TEXT NOT NULL,
+                          giorno TEXT NOT NULL,
+                          start TEXT NOT NULL,
+                          end TEXT NOT NULL,
                           FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
                           FOREIGN KEY (idop) REFERENCES operatori(idop) ON DELETE CASCADE
                         );
@@ -144,12 +145,24 @@
                           FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );
 
+                        DROP TABLE IF EXISTS accertamento;
+                        CREATE TABLE accertamento (
+                          idac TEXT PRIMARY KEY NOT NULL,
+                          idp TEXT NOT NULL,
+                          idop TEXT NOT NULL,
+                          ids TEXT NOT NULL,
+                          data TEXT NOT NULL,
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE,
+                          FOREIGN KEY (idop) REFERENCES operatori(idop) ON DELETE CASCADE,
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE
+                        );  
+
                         DROP TABLE IF EXISTS effettiCollaterali;
                         CREATE TABLE effettiCollaterali (
-                          idp TEXT NOT NULL,
-                          data TEXT NOT NULL,
+                          idec TEXT PRIMARY KEY NOT NULL,
+                          idac TEXT NOT NULL,
                           descrizione TEXT NOT NULL,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
+                          FOREIGN KEY (idac) REFERENCES accertamento(idac) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS orari;
