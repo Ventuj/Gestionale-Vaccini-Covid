@@ -176,6 +176,12 @@
     <Compile Include="viewStudioMedico.Designer.cs">
       <DependentUpon>viewStudioMedico.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewOperatore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewOperatore.Designer.cs">
+      <DependentUpon>ViewOperatore.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="viewStudioMedico.resx">
       <DependentUpon>viewStudioMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewOperatore.resx">
+      <DependentUpon>ViewOperatore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUser.resx">
       <DependentUpon>ViewUser.cs</DependentUpon>

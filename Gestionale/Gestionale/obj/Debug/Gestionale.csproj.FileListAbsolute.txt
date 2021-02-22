@@ -50,3 +50,4 @@ D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\G
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\bin\Debug\Renci.SshNet.xml
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.ViewStruttura.resources
 D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.Operatori.resources
+D:\Desktop\Scuola\5° Superiore\Informatica\Programmi\Gestionale-Vaccini-Covid\Gestionale\Gestionale\obj\Debug\Gestionale.ViewOperatore.resources

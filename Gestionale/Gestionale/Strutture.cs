@@ -19,6 +19,7 @@ namespace Gestionale
             InitializeComponent();
             stampaLista();
             groupBox1.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void stampaLista() {
@@ -71,7 +72,7 @@ namespace Gestionale
             }
         }
 
-        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private void datiPazienti_CellMouseDoubleClick_1(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[0, e.RowIndex].Value.ToString();

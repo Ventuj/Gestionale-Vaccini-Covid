@@ -12,8 +12,11 @@ namespace Gestionale
 {
     public partial class ViewOperatore : Form
     {
-        public ViewOperatore() {
+        database db = new database();
+        string idop = "";
+        public ViewOperatore(string id) {
             InitializeComponent();
+            idop = id;
         }
     }
 }

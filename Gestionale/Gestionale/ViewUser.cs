@@ -201,5 +201,9 @@ namespace Gestionale
             v.ShowDialog();
             this.Show();
         }
+
+        // gestione operatori per effettuare il vaccino covid
+        // update in base alla struttura selezionata 
+        // string struttura -> string operatore (dipendenza)
     }
 }

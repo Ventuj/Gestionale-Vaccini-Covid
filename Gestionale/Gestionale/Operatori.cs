@@ -17,6 +17,7 @@ namespace Gestionale
         public Operatori() {
             InitializeComponent();
             stampaLista();
+            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void stampaLista() {

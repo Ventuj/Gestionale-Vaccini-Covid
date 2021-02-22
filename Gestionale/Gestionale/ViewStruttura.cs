@@ -19,7 +19,7 @@ namespace Gestionale
         public ViewStruttura(string id) {
             InitializeComponent();
             ids = id;
-            groupBox1.ForeColor = Color.White;
+            groupBox1.ForeColor = groupBox2.ForeColor = Color.White;
             caricaDati();
         }
 
@@ -44,6 +44,21 @@ namespace Gestionale
         }
 
         // add turni
-        // 
+        public void addTurno() {
+
+        }
+
+        // orari 
+
+        // view operatori legati alla struttura
+        public void operatoriStruttura() {
+
+        }
+
+        // view operatori disponibili per aggiunta turno
+
+        public void tableOperatori() {
+
+        }
     }
 }
