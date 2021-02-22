@@ -1,2 +1,2 @@
 # Gestionale Vaccini Covid
-![Schema](https://i.imgur.com/pF1mA1Y.png)
+![Schema](https://imgur.com/y4gBfmR.png)
