@@ -22,7 +22,7 @@ namespace Gestionale
         }
 
         private void stampaLista() {
-            string comandosql = "SELECT ids,massimali,indirizzo FROM strutture";
+            string comandosql = "SELECT * FROM strutture";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
@@ -54,7 +54,7 @@ namespace Gestionale
 
         private void button1_Click(object sender, EventArgs e) {
             if (txtEmail.Text != "" && txtIndirizzo.Text != "" && txtMassimali.Text != "") {
-                if (db.rowCount(string.Format("SELECT COUNT(*) FROM strutture WHERE indirizzo = '{0}' AND massimali = {1} AND email = '{2}'", txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text)) == 0)
+                if (db.rowCount(string.Format("SELECT COUNT(*) FROM strutture WHERE indirizzo = '{0}' AND email = '{1}'", txtIndirizzo.Text, txtEmail.Text)) == 0)
                 {
                     db.esegui(string.Format("INSERT INTO strutture(ids, indirizzo, massimali, email) VALUES('{0}', '{1}', {2}, '{3}')", db.UUID(18, 3, 5), txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text));
                     stampaLista();
