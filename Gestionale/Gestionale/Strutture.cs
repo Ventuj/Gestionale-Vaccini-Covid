@@ -14,43 +14,13 @@ namespace Gestionale
     public partial class Strutture : Form
     {
         database db = new database();
-        public string[] valori = new string[36];
+
         public Strutture() {
             InitializeComponent();
-            carica();
             stampaLista();
+            groupBox1.ForeColor = Color.White;
         }
 
-        public void carica() {
-            for (int i = 0; i < 36; i++)
-            {
-                if (i < 10)
-                {
-                    valori[i] = Convert.ToString(i);
-                }
-                else
-                {
-                    valori[i] = Convert.ToString((char)('a' + i - 10));
-                }
-            }
-        }
-
-        public string UUID() {
-            string cu = "";
-            Random rnd = new Random();
-            for (int i = 0; i < 15; i++)
-            {
-                if (cu.Length == 3 || cu.Length == 12)
-                {
-                    cu += "-";
-                }
-                else
-                {
-                    cu += valori[rnd.Next(0, 36)];
-                }
-            }
-            return cu.ToUpper();
-        }
         private void stampaLista() {
             string comandosql = "SELECT ids,massimali,indirizzo FROM strutture";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
@@ -84,8 +54,48 @@ namespace Gestionale
 
         private void button1_Click(object sender, EventArgs e) {
             if (txtEmail.Text != "" && txtIndirizzo.Text != "" && txtMassimali.Text != "") {
-                db.esegui(string.Format("INSERT INTO strutture(ids, indirizzo, massimali, email) VALUES('{0}', '{1}', {2}, '{3}')", UUID(), txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text));
-                stampaLista();
+                if (db.rowCount(string.Format("SELECT COUNT(*) FROM strutture WHERE indirizzo = '{0}' AND massimali = {1} AND email = '{2}'", txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text)) == 0)
+                {
+                    db.esegui(string.Format("INSERT INTO strutture(ids, indirizzo, massimali, email) VALUES('{0}', '{1}', {2}, '{3}')", db.UUID(18, 3, 5), txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text));
+                    stampaLista();
+                    txtEmail.Text = txtIndirizzo.Text = txtMassimali.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Struttura già inserita");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Alcuni campi risultano vuoti");
+            }
+        }
+
+        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Right)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format(@"
+                                                    DELETE FROM strutture WHERE ids = '{0}'; 
+                                                    DELETE FROM turni WHERE ids = '{0}';
+                                                    DELETE FROM spedizioni WHERE ids = '{0}';
+                                                    DELETE FROM scorte WHERE ids = '{0}';", id));
+                        stampaLista();
+                    }
+                }
+                else
+                {
+                    ViewStruttura view = new ViewStruttura(id);
+                    this.Hide();
+                    view.ShowDialog();
+                    stampaLista();
+                    this.Show();
+                }
             }
         }
     }

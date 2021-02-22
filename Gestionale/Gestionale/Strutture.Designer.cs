@@ -26,6 +26,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtIndirizzo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -50,14 +54,14 @@
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(328, 126);
+            this.groupBox1.Size = new System.Drawing.Size(554, 126);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Aggiungi Struttura";
             // 
             // txtIndirizzo
             // 
-            this.txtIndirizzo.Location = new System.Drawing.Point(6, 50);
+            this.txtIndirizzo.Location = new System.Drawing.Point(123, 54);
             this.txtIndirizzo.Name = "txtIndirizzo";
             this.txtIndirizzo.Size = new System.Drawing.Size(100, 22);
             this.txtIndirizzo.TabIndex = 4;
@@ -65,7 +69,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 28);
+            this.label9.Location = new System.Drawing.Point(144, 32);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 17);
             this.label9.TabIndex = 19;
@@ -74,7 +78,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(233, 28);
+            this.label8.Location = new System.Drawing.Point(350, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 17;
@@ -85,7 +89,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(90, 78);
+            this.button1.Location = new System.Drawing.Point(207, 82);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 38);
             this.button1.TabIndex = 10;
@@ -95,7 +99,7 @@
             // 
             // txtMassimali
             // 
-            this.txtMassimali.Location = new System.Drawing.Point(218, 50);
+            this.txtMassimali.Location = new System.Drawing.Point(335, 54);
             this.txtMassimali.Name = "txtMassimali";
             this.txtMassimali.Size = new System.Drawing.Size(100, 22);
             this.txtMassimali.TabIndex = 9;
@@ -104,7 +108,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(138, 30);
+            this.label6.Location = new System.Drawing.Point(255, 34);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 17);
             this.label6.TabIndex = 13;
@@ -112,7 +116,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(112, 50);
+            this.txtEmail.Location = new System.Drawing.Point(229, 54);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(100, 22);
             this.txtEmail.TabIndex = 5;
@@ -122,23 +126,52 @@
             this.datiPazienti.AllowUserToAddRows = false;
             this.datiPazienti.AllowUserToDeleteRows = false;
             this.datiPazienti.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datiPazienti.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.datiPazienti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.datiPazienti.DefaultCellStyle = dataGridViewCellStyle2;
             this.datiPazienti.Location = new System.Drawing.Point(12, 144);
             this.datiPazienti.Name = "datiPazienti";
             this.datiPazienti.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.datiPazienti.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.datiPazienti.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.datiPazienti.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.datiPazienti.RowTemplate.Height = 24;
             this.datiPazienti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.datiPazienti.Size = new System.Drawing.Size(328, 377);
+            this.datiPazienti.Size = new System.Drawing.Size(554, 377);
             this.datiPazienti.TabIndex = 11;
+            this.datiPazienti.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.datiPazienti_CellMouseDoubleClick);
             // 
             // Strutture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 533);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(177)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(578, 533);
             this.Controls.Add(this.datiPazienti);
             this.Controls.Add(this.groupBox1);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
