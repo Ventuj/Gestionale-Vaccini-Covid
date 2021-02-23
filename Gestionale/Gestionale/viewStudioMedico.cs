@@ -21,6 +21,8 @@ namespace Gestionale
             caricaDati();
             caricaListaMediciCompleta();
             caricaListaMediciStudio();
+            fillCombo();
+            stampaOrari();
             groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = Color.White;
             this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
@@ -134,6 +136,78 @@ namespace Gestionale
                     caricaListaMediciCompleta();
                     caricaListaMediciStudio();
                     this.Show();
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            addOrario();
+        }
+
+        private void fillCombo() {
+            for (int i = 0; i <= 23; i++)
+            {
+                comboBox4.Items.Add(Convert.ToString(i));
+                comboBox5.Items.Add(Convert.ToString(i));
+            }
+        }
+
+
+        // orari
+        private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.dataGridView2[0, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Left)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questo orario?", "Informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM orari WHERE ido = '{0}'", id));
+                        stampaOrari();
+                    }
+                }
+            }
+        }
+
+        private void stampaOrari() {
+            string comandosql = @"SELECT ido, orario, giorno FROM orari WHERE id = '" + idst + "'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
+                    DataSet ds = new DataSet("tabelle");
+                    da.Fill(ds, "tabella");
+                    dataGridView2.DataSource = ds.Tables["tabella"];
+                    dataGridView2.Refresh();
+                }
+                connessione.Close();
+            }
+        }
+
+        private void addOrario() {
+            string orario = comboBox5.Text + " - " + comboBox4.Text;
+            string giorno = comboBox6.Text;
+            if (Convert.ToInt32(comboBox5.Text) < Convert.ToInt32(comboBox4.Text))
+            {
+                if (comboBox4.Text != "" && comboBox5.Text != "" && comboBox6.Text != "")
+                {
+                    // orario già inserito
+                    if (db.rowCount(string.Format("SELECT COUNT(*) FROM orari WHERE id = '{0}' AND orario = '{1}' AND giorno = '{2}'", idst, orario, giorno)) == 0)
+                    {
+                        db.esegui(string.Format("INSERT INTO orari(ido, id, orario, giorno) VALUES('{0}', '{1}', '{2}', '{3}')", db.UUID(11, 2, 7), idst, orario, giorno));
+                        stampaOrari();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Orario già inserito");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Non sono stati selezionati tutti i parametri ");
                 }
             }
         }

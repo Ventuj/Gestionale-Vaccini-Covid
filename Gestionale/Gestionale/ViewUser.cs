@@ -212,5 +212,35 @@ namespace Gestionale
         // gestione operatori per effettuare il vaccino covid
         // update in base alla struttura selezionata 
         // string struttura -> string operatore (dipendenza)
+
+        // selettori struttura e operatore 
+        // selettori condivi sia per l'accertamento sia per il vaccino
+
+        // inserimento vaccino covid
+        private void button3_Click(object sender, EventArgs e) {
+
+        }
+
+        // tabella vaccinazioni covid 
+        private void stampaCovid() {
+
+        }
+
+        // tabella accertamenti
+        private void stampaAccertamenti() {
+
+        }
+
+        // tabella strutture
+        private void stampaStrutture() {
+
+        }
+
+        // tabella operatori
+        // dipende da strutture 
+        // non caricare prima di aver caricato la struttura
+        private void stampaOperatori() {
+
+        }
     }
 }
