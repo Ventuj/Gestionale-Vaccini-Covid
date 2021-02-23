@@ -48,7 +48,7 @@ namespace Gestionale
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 string id = this.datiPazienti[1, e.RowIndex].Value.ToString();
-                if (e.Button == MouseButtons.Left)
+                if (e.Button == MouseButtons.Right)
                 {
                     DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
@@ -59,6 +59,13 @@ namespace Gestionale
                                                     DELETE FROM turni WHERE ids = '{0}'", id));
                         stampaLista();
                     }
+                }
+                else
+                {
+                    ViewMedico v = new ViewMedico(this.datiPazienti[0, e.RowIndex].Value.ToString());
+                    this.Hide();
+                    v.ShowDialog();
+                    this.Show();
                 }
             }
         }

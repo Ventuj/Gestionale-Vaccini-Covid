@@ -118,7 +118,12 @@ namespace Gestionale
 
         // Visualizza operatori Covid
         private void button4_Click(object sender, EventArgs e) {
-
+            Operatori o = new Operatori();
+            this.Hide();
+            o.ShowDialog();
+            checkST();
+            controlloOP();
+            this.Show();
         }
 
         private void button2_Click(object sender, EventArgs e) {
