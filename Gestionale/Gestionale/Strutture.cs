@@ -57,7 +57,9 @@ namespace Gestionale
             if (txtEmail.Text != "" && txtIndirizzo.Text != "" && txtMassimali.Text != "") {
                 if (db.rowCount(string.Format("SELECT COUNT(*) FROM strutture WHERE indirizzo = '{0}' AND email = '{1}'", txtIndirizzo.Text, txtEmail.Text)) == 0)
                 {
-                    db.esegui(string.Format("INSERT INTO strutture(ids, indirizzo, massimali, email) VALUES('{0}', '{1}', {2}, '{3}')", db.UUID(18, 3, 5), txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text));
+                    string id = db.UUID(18, 3, 5);
+                    db.esegui(string.Format("INSERT INTO strutture(ids, indirizzo, massimali, email) VALUES('{0}', '{1}', {2}, '{3}')", id, txtIndirizzo.Text, Convert.ToInt32(txtMassimali.Text), txtEmail.Text));
+                    db.esegui(string.Format("INSERT INTO scorte(ids, quantita) VALUES('{0}', 0)",id));
                     stampaLista();
                     txtEmail.Text = txtIndirizzo.Text = txtMassimali.Text = "";
                 }
@@ -85,7 +87,8 @@ namespace Gestionale
                                                     DELETE FROM strutture WHERE ids = '{0}'; 
                                                     DELETE FROM turni WHERE ids = '{0}';
                                                     DELETE FROM spedizioni WHERE ids = '{0}';
-                                                    DELETE FROM scorte WHERE ids = '{0}';", id));
+                                                    DELETE FROM scorte WHERE ids = '{0}';
+                                                    DELETE FROM orari WHERE id = '{0}';", id));
                         stampaLista();
                     }
                 }

@@ -20,11 +20,12 @@ namespace Gestionale
         public ViewStruttura(string id) {
             InitializeComponent();
             ids = id;
-            groupBox1.ForeColor = groupBox2.ForeColor = Color.White;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = Color.White;
             caricaDati();
             fillCombo();
             tableOperatori();
             stampaTurni();
+            stampaOrari();
         }
 
         private void fillCombo() {
@@ -32,6 +33,8 @@ namespace Gestionale
             {
                 comboBox2.Items.Add(Convert.ToString(i));
                 comboBox3.Items.Add(Convert.ToString(i));
+                comboBox4.Items.Add(Convert.ToString(i));
+                comboBox5.Items.Add(Convert.ToString(i));
             }
         }
 
@@ -39,14 +42,14 @@ namespace Gestionale
             indirizo = txtIndirizzo.Text = Convert.ToString(db.getData(string.Format("SELECT indirizzo FROM strutture WHERE ids = '{0}'", ids)));
             email = txtEmail.Text = Convert.ToString(db.getData(string.Format("SELECT email FROM strutture WHERE ids = '{0}'", ids)));
             massimali = Convert.ToInt32(db.getData(string.Format("SELECT massimali FROM strutture WHERE ids = '{0}'", ids)));
-            txtMassimali.Text = Convert.ToString(massimali);
+            lbldispo.Text = Convert.ToString(db.getData(string.Format("SELECT quantita FROM SCORTE WHERE ids = '{0}'", ids)));
         }
 
         // Update
         private void button1_Click(object sender, EventArgs e) {
-            if (txtEmail.Text != "" && txtIndirizzo.Text != "" && txtMassimali.Text != "")
+            if (txtEmail.Text != "" && txtIndirizzo.Text != "")
             {
-                db.esegui(string.Format("UPDATE strutture SET email = '{0}', massimali = {1}, email = '{2}' WHERE ids = '{3}'", txtEmail.Text, Convert.ToInt32(txtMassimali.Text), txtIndirizzo.Text, ids));
+                db.esegui(string.Format("UPDATE strutture SET email = '{0}', indirizzo = '{1}' WHERE ids = '{2}'", txtEmail.Text, txtIndirizzo.Text, ids));
                 caricaDati();
             }
             else
@@ -63,7 +66,7 @@ namespace Gestionale
             if (start != "" && end != "" && giorno != "")
             {
                 // Se esiste già questo turno
-                if (db.rowCount(string.Format("SELECT COUNT(*) FROM turni WHERE ids = '{0}' AND idop = '{1}' AND giorno = '{2}' AND (('{3}' <= start AND '{3}' >= start) OR ('{4}' <= end AND '{4}' >= start))", ids , idop, giorno, start, end)) == 0)
+                if (db.rowCount(string.Format("SELECT COUNT(*) FROM turni WHERE ids = '{0}' AND idop = '{1}' AND giorno = '{2}'", ids , idop, giorno)) == 0)
                 {
                     db.esegui(string.Format("INSERT INTO turni(idtu, idop, ids, giorno, start, end) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", db.UUID(12, 2, 7), idop, ids, giorno, start, end));
                     MessageBox.Show("Turno inserito correttamente");
@@ -76,6 +79,31 @@ namespace Gestionale
             else
             {
                 MessageBox.Show("Non sono stati selezionati tutti i parametri ");
+            }
+        }
+
+        public void addOrario() {
+            string orario = comboBox5.Text + " - " + comboBox4.Text;
+            string giorno = comboBox6.Text;
+            if (Convert.ToInt32(comboBox5.Text) < Convert.ToInt32(comboBox4.Text))
+            {
+                if (comboBox4.Text != "" && comboBox5.Text != "" && comboBox6.Text != "")
+                {
+                    // orario già inserito
+                    if (db.rowCount(string.Format("SELECT COUNT(*) FROM orari WHERE id = '{0}' AND orario = '{1}' AND giorno = '{2}'", ids, orario, giorno)) == 0)
+                    {
+                        db.esegui(string.Format("INSERT INTO orari(ido, id, orario, giorno) VALUES('{0}', '{1}', '{2}', '{3}')", db.UUID(11, 2, 7), ids, orario, giorno));
+                        stampaOrari();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Orario già inserito");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Non sono stati selezionati tutti i parametri ");
+                }
             }
         }
 
@@ -92,24 +120,79 @@ namespace Gestionale
         }
 
         // orari 
+        public void stampaOrari() {
+            string comandosql = @"SELECT ido, orario, giorno FROM orari WHERE id = '" + ids + "'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
+                    DataSet ds = new DataSet("tabelle");
+                    da.Fill(ds, "tabella");
+                    dataGridView2.DataSource = ds.Tables["tabella"];
+                    dataGridView2.Refresh();
+                }
+                connessione.Close();
+            }
+        }
 
         // view operatori legati alla struttura
         public void operatoriStruttura() {
 
         }
 
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.dataGridView1[7, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Left)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questo turno?", "Informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM turni WHERE idtu = '{0}'", id));
+                        stampaTurni();
+                        tableOperatori();
+                    }
+                }
+            }
+        }
+
+        // tabella orario
+        private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.dataGridView2[0, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Left)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questo orario?", "Informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM orari WHERE ido = '{0}'", id));
+                        stampaOrari();
+                    }
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            addOrario();
+        }
+
         // lista turni
         public void stampaTurni() {
             string comandosql = @"
                                 SELECT 
-                                    operatori.idop,
                                     personale.cognome,
                                     personale.nome,
                                     personale.tipo,
                                     turni.giorno,
                                     turni.start AS inizio,
-                                    turni.end AS fine
-                                FROM personale, operatori, turni WHERE personale.idpe = operatori.idpe AND turni.idop = operatori.idop AND turni.ids = '"+ ids +"'";
+                                    turni.end AS fine,
+                                    operatori.idop,
+                                    turni.idtu AS id
+                                FROM personale, operatori, turni WHERE personale.idpe = operatori.idpe AND turni.idop = operatori.idop AND turni.ids = '" + ids +"'";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();

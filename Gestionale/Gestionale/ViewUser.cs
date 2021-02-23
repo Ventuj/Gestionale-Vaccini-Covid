@@ -22,6 +22,11 @@ namespace Gestionale
             idp = id;
             caricaDati();
             fillComboVaccini();
+            datiPazienti.Columns.Add("1", "ID");
+            datiPazienti.Columns.Add("1", "Data");
+            datiPazienti.Columns.Add("1", "Dose");
+            datiPazienti.Columns.Add("1", "Tipo");
+            datiPazienti.Columns.Add("1", "Malattia");
             stampaTabellaVaccini();
             stampaListaMedici();
             checkMedico();
@@ -96,17 +101,19 @@ namespace Gestionale
         }
 
         private void stampaTabellaVaccini() {
+            datiPazienti.Rows.Clear();
             string comandosql = "SELECT vacciniPazienti.idrVP as ID, vacciniPazienti.data, vacciniPazienti.dose, vaccini.tipo, vaccini.malattia FROM vaccini,vacciniPazienti WHERE vacciniPazienti.idp = '" + idp +"' AND vacciniPazienti.idv = vaccini.idv";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
                 using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
                 {
-                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
-                    DataSet ds = new DataSet("tabelle");
-                    da.Fill(ds, "tabella");
-                    datiPazienti.DataSource = ds.Tables["tabella"];
-                    datiPazienti.Refresh();
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        datiPazienti.Rows.Add(dr["ID"].ToString(), db.inverter(dr["data"].ToString()), dr["dose"].ToString(), dr["tipo"].ToString(), dr["malattia"].ToString());
+                    }
+                    dr.Close();
                 }
                 connessione.Close();
             }

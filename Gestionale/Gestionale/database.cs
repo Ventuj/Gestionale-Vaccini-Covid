@@ -47,6 +47,13 @@ namespace Gestionale
             return Convert.ToString(epoch);
         }
 
+        public string inverter(string timestamp) {
+            long time = long.Parse(timestamp);
+            System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            dateTime = dateTime.AddSeconds(time);
+            return dateTime.Day.ToString() + "/" + dateTime.Month.ToString() + "/" + dateTime.Year.ToString();
+        }
+
         public string getData(string cmd) {
             var variabile = "";
             using (SQLiteConnection connessione = new SQLiteConnection(stringaConnessione))
@@ -263,9 +270,10 @@ namespace Gestionale
 
                         DROP TABLE IF EXISTS orari;
                         CREATE TABLE orari (
+                          ido TEXT PRIMARY KEY NOT NULL,
                           id TEXT NOT NULL,
                           orario TEXT NOT NULL,
-                          giorno INTEGER NOT NULL,
+                          giorno TEXT NOT NULL,
                           FOREIGN KEY (id) REFERENCES studiomedico(idst) ON DELETE CASCADE,
                           FOREIGN KEY (id) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
