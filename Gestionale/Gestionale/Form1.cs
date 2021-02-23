@@ -49,7 +49,7 @@ namespace Gestionale
 
         // vaccini covid
         private void button3_Click(object sender, EventArgs e) {
-            VacciniC m = new VacciniC();
+            viewVaccino m = new viewVaccino();
             this.Hide();
             m.ShowDialog();
             this.Show();

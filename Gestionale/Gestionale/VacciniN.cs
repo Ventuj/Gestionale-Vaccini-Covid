@@ -91,5 +91,32 @@ namespace Gestionale
                 MessageBox.Show("Alcuni campi risultano vuoti");
             }
         }
+
+        private void datiPazienti_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                if (e.Button == MouseButtons.Right)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format(@"
+                                                    DELETE FROM vaccini WHERE idv = '{0}'; 
+                                                    DELETE FROM vacciniPazienti WHERE idv = '{0}';", id));
+                        stampaLista();
+                    }
+                }
+                else
+                {
+                    ViewStruttura view = new ViewStruttura(id);
+                    this.Hide();
+                    view.ShowDialog();
+                    stampaLista();
+                    this.Show();
+                }
+            }
+        }
+    }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Gestionale
 {
-    partial class VacciniC
+    partial class viewVaccino
     {
         /// <summary>
         /// Required designer variable.

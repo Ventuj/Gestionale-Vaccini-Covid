@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace Gestionale
 {
-    public partial class VacciniC : Form
+    public partial class viewVaccino : Form
     {
         database db = new database();
+        string idv = "";
 
-        public string[] valori = new string[36];
-        public VacciniC() {
+        public viewVaccino(string id) {
             InitializeComponent();
-
+            idv = id;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Gestionale
     public partial class ViewUser : Form
     {
         database db = new database();
-        string nome, cognome, idp, indirizzo, luogodinascita, cellulare, telefono, email, codicefiscale = "";
+        string nome, cognome, idp, indirizzo, luogodinascita, cellulare, telefono, email, codicefiscale, idst, idop = "";
         string nomem, cognomem, idpe = "";
 
         public ViewUser(string id) {
@@ -31,7 +31,7 @@ namespace Gestionale
             stampaListaMedici();
             checkMedico();
             label1.Text = cognome + " " + nome;
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = Color.White;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = Color.White;
             this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
             this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
         }
