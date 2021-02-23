@@ -697,7 +697,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(6, 44);
+            this.dateTimePicker2.Location = new System.Drawing.Point(15, 62);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(178, 22);
             this.dateTimePicker2.TabIndex = 16;
@@ -717,7 +717,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(68, 24);
+            this.label21.Location = new System.Drawing.Point(77, 42);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(38, 17);
             this.label21.TabIndex = 17;
@@ -745,14 +745,14 @@
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 25);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 22);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(307, 266);
+            this.dataGridView2.Size = new System.Drawing.Size(301, 266);
             this.dataGridView2.TabIndex = 13;
             // 
             // dataGridView3
@@ -777,14 +777,14 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 21);
+            this.dataGridView3.Location = new System.Drawing.Point(6, 97);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowHeadersWidth = 51;
             this.dataGridView3.RowTemplate.Height = 24;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(307, 270);
+            this.dataGridView3.Size = new System.Drawing.Size(307, 275);
             this.dataGridView3.TabIndex = 14;
             // 
             // dataGridView4
@@ -909,7 +909,7 @@
             this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(185)))), ((int)(((byte)(255)))));
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(92, 100);
+            this.button8.Location = new System.Drawing.Point(103, 100);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(96, 38);
             this.button8.TabIndex = 10;
@@ -919,7 +919,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(117, 44);
+            this.label20.Location = new System.Drawing.Point(128, 42);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(38, 17);
             this.label20.TabIndex = 17;
@@ -928,18 +928,18 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(83, 311);
+            this.label22.Location = new System.Drawing.Point(116, 311);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(90, 21);
+            this.label22.Size = new System.Drawing.Size(72, 17);
             this.label22.TabIndex = 18;
             this.label22.Text = "idstruttura";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(83, 330);
+            this.label23.Location = new System.Drawing.Point(116, 49);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(101, 21);
+            this.label23.Size = new System.Drawing.Size(81, 17);
             this.label23.TabIndex = 18;
             this.label23.Text = "idoperatore";
             // 
