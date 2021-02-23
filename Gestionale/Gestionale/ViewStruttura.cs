@@ -20,7 +20,7 @@ namespace Gestionale
         public ViewStruttura(string id) {
             InitializeComponent();
             ids = id;
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = Color.White;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = Color.White;
             caricaDati();
             fillCombo();
             tableOperatori();
