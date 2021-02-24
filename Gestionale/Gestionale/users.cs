@@ -70,7 +70,12 @@ namespace Gestionale
                     {
                         db.esegui(string.Format(@"
                                                     DELETE FROM pazienti WHERE idp = '{0}'; 
-                                                    DELETE FROM vacciniPazienti WHERE idp = '{0}'", id));
+                                                    DELETE FROM vacciniPazienti WHERE idp = '{0}';
+                                                    DELETE FROM vacciniCovid WHERE idp = '{0}';
+                                                    DELETE FROM prenotazioniCovid WHERE idp = '{0}';
+                                                    DELETE FROM effettiCollaterali WHERE idac = (SELECT idac FROM accertamenti WHERE idp = '{0}');
+                                                    DELETE FROM Accertamento WHERE idp = '{0}';
+                                                    ", id));
                         stampaLista();
                     }
                 }

@@ -20,12 +20,13 @@ namespace Gestionale
             InitializeComponent();
             idp = id;
             caricaDati();
+            textBox3.Enabled = false;
             // header tabelle
             datiPazienti.Columns.Add("1", "ID"); datiPazienti.Columns.Add("1", "Data"); datiPazienti.Columns.Add("1", "Dose"); datiPazienti.Columns.Add("1", "Tipo"); datiPazienti.Columns.Add("1", "Malattia");
             dataGridView2.Columns.Add("1", "Indirizzo"); dataGridView2.Columns.Add("1", "Email"); dataGridView2.Columns.Add("1", "Quantià"); dataGridView2.Columns.Add("1", "ids");
             dataGridView6.Columns.Add("1", "Data"); dataGridView6.Columns.Add("1", "Ora"); dataGridView6.Columns.Add("1", "id");
             dataGridView4.Columns.Add("1", "Data"); dataGridView4.Columns.Add("1", "Lotto"); dataGridView4.Columns.Add("1", "Data Di Produzione"); dataGridView4.Columns.Add("1", "Dose"); dataGridView4.Columns.Add("1", "idv");
-
+            dataGridView5.Columns.Add("1", "Data"); dataGridView5.Columns.Add("1", "Operatore"); dataGridView5.Columns.Add("1", "Struttura"); dataGridView5.Columns.Add("1", "id");
             // stilistica
             label1.Text = cognome + " " + nome;
             groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = groupBox9.ForeColor = Color.White;
@@ -39,6 +40,7 @@ namespace Gestionale
             stampaStrutture();
             fillCombo();
             stampaCovid();
+            stampaAccertamenti();
         }
 
         private void fillCombo() {
@@ -276,6 +278,7 @@ namespace Gestionale
                 connessione.Close();
             }
         }
+
         // Tabella covid 
         private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.Button == MouseButtons.Left)
@@ -295,7 +298,94 @@ namespace Gestionale
 
         // tabella accertamenti
         private void stampaAccertamenti() {
+            dataGridView5.Rows.Clear();
+            string comandosql = "SELECT data,idop,ids,idac FROM Accertamento WHERE idp = '" + idp + "'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView5.Rows.Add(db.inverter(dr["data"].ToString()), dr["idop"].ToString(), dr["ids"].ToString(), dr["idac"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
 
+        private void button7_Click(object sender, EventArgs e) {
+            addAcc();
+        }
+
+        private void dataGridView5_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView5[3, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM Accertamento WHERE idac = '{0}'", id));
+                        db.esegui(string.Format("DELETE FROM effettiCollaterali WHERE idac = '{0}'", id));
+                        stampaAccertamenti();
+                    }
+                }
+            }
+            else
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView5[3, e.RowIndex].Value.ToString();
+                    string note = Convert.ToString(db.getData(string.Format("SELECT descrizione FROM effettiCollaterali WHERE idac = '{0}'", id)));
+                    MessageBox.Show("Effetti collaterali: " + note, "Note accertamento");
+                }
+                
+            }
+        }
+
+        private void checkEFF_CheckedChanged(object sender, EventArgs e) {
+            if (checkEFF.Checked)
+            {
+                textBox3.Enabled = true;
+            }
+            else
+            {
+                textBox3.Enabled = false;
+            }
+        }
+
+        private void addAcc() {
+            if (idop != "" && idst != "")
+            {
+                if (checkEFF.Checked)
+                {
+                    if (textBox3.Text != "")
+                    {
+                        string id = db.UUID(20,8, 16);
+                        db.esegui(string.Format("INSERT INTO Accertamento(idac, idop, idp, ids, data) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", id, idop, idp, idst, db.converter(dateTimePicker2.Text)));
+                        db.esegui(string.Format("INSERT INTO effettiCollaterali(idec, idac, descrizione) VALUES('{0}', '{1}',  '{2}')", db.UUID(20, 7, 17), id, textBox3.Text));
+                        stampaAccertamenti();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Il campo testo non può essere vuoto", "informazioni");
+                    }
+                }
+                else
+                {
+                    string id = db.UUID(20, 8, 16);
+                    db.esegui(string.Format("INSERT INTO Accertamento(idac, idop, idp, ids, data) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", id, idop, idp, idst, db.converter(dateTimePicker2.Text)));
+                    stampaAccertamenti();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Per poter inserire la vaccinazione è necessario selezionare struttura e operatore", "informazioni");
+            }
         }
 
         // tabella strutture
