@@ -30,6 +30,7 @@ namespace Gestionale
             stampaTabellaVaccini();
             stampaListaMedici();
             checkMedico();
+            stampaStrutture();
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -229,8 +230,7 @@ namespace Gestionale
 
         // tabella strutture
         private void stampaStrutture() {
-            /*
-            string comandosql = "SELECT strutture WHERE (SELECT quantita FROM scorte WHERE ids = struttre.ids) > 0";
+            string comandosql = "SELECT indirizzo,email,ids FROM strutture";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
@@ -239,13 +239,17 @@ namespace Gestionale
                     SQLiteDataReader dr = comando.ExecuteReader();
                     while (dr.Read())
                     {
-                        dataGridView2.Rows.Add(dr["ID"].ToString(), db.inverter(dr["data"].ToString()), dr["dose"].ToString(), dr["tipo"].ToString(), dr["malattia"].ToString());
+                        string id = dr["ids"].ToString();
+                        int qt = Convert.ToInt32(db.getData(string.Format("SELECT quantita FROM scorte WHERE ids = '{0}'", id)));
+                        if (qt > 0)
+                        {
+                            dataGridView2.Rows.Add(dr["indirizzo"].ToString(), dr["email"].ToString(), qt , id);
+                        }
                     }
                     dr.Close();
                 }
                 connessione.Close();
             }
-            */
         }
 
         // tabella operatori
