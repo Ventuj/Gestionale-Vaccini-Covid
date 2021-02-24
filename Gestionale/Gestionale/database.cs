@@ -241,10 +241,8 @@ namespace Gestionale
                         CREATE TABLE prenotazioniCovid (
                           idpr TEXT PRIMARY KEY NOT NULL,
                           idp TEXT NOT NULL,
-                          ids TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
                           FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
                         );
 

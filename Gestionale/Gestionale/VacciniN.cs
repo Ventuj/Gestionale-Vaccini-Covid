@@ -109,7 +109,7 @@ namespace Gestionale
                 }
                 else
                 {
-                    ViewStruttura view = new ViewStruttura(id);
+                    viewVaccino view = new viewVaccino(id);
                     this.Hide();
                     view.ShowDialog();
                     stampaLista();

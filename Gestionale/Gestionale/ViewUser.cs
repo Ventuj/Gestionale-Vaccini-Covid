@@ -11,8 +11,7 @@ using System.Windows.Forms;
 
 namespace Gestionale
 {
-    public partial class ViewUser : Form
-    {
+    public partial class ViewUser : Form {
         database db = new database();
         string nome, cognome, idp, indirizzo, luogodinascita, cellulare, telefono, email, codicefiscale, idst, idop = "";
         string nomem, cognomem, idpe = "";
@@ -21,17 +20,29 @@ namespace Gestionale
             InitializeComponent();
             idp = id;
             caricaDati();
+
             datiPazienti.Columns.Add("1", "ID"); datiPazienti.Columns.Add("1", "Data"); datiPazienti.Columns.Add("1", "Dose"); datiPazienti.Columns.Add("1", "Tipo"); datiPazienti.Columns.Add("1", "Malattia");
             dataGridView2.Columns.Add("1", "Indirizzo"); dataGridView2.Columns.Add("1", "Email"); dataGridView2.Columns.Add("1", "Quantià"); dataGridView2.Columns.Add("1", "ids");
+            dataGridView6.Columns.Add("1", "Data"); dataGridView6.Columns.Add("1", "Ora"); dataGridView6.Columns.Add("1", "id");
+
             label1.Text = cognome + " " + nome;
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = Color.White;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = groupBox9.ForeColor = Color.White;
             this.datiPazienti.DefaultCellStyle.ForeColor = this.dataGridView6.DefaultCellStyle.ForeColor = this.dataGridView1.DefaultCellStyle.ForeColor = this.dataGridView2.DefaultCellStyle.ForeColor = this.dataGridView3.DefaultCellStyle.ForeColor = this.dataGridView4.DefaultCellStyle.ForeColor = this.dataGridView5.DefaultCellStyle.ForeColor = Color.Black;
             fillComboVaccini();
             stampaTabellaVaccini();
             stampaListaMedici();
             checkMedico();
             stampaStrutture();
+            fillCombo();
         }
+
+        private void fillCombo() {
+            for (int i = 0; i <= 23; i++)
+            {
+                comboBox2.Items.Add(Convert.ToString(i));
+            }
+        }
+
 
         private void button1_Click(object sender, EventArgs e) {
             if (txtNome.Text != "" && txtCognome.Text != "" && textCF.Text != "" && txtLuogoDN.Text != "" && txtIndirizzo.Text != "" && txtTel.Text != "" && txtCel.Text != "" && txtEmail.Text != "")
@@ -41,17 +52,17 @@ namespace Gestionale
         }
 
         private void datiPazienti_CellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
-            if (e.Button == MouseButtons.Left) { 
+            if (e.Button == MouseButtons.Left) {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
-                        string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
-                        DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            db.esegui(string.Format("DELETE FROM vacciniPazienti WHERE idrVP = '{0}'", id));
-                            stampaTabellaVaccini();
-                        }
-                 }
+                    string id = this.datiPazienti[0, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM vacciniPazienti WHERE idrVP = '{0}'", id));
+                        stampaTabellaVaccini();
+                    }
+                }
             }
         }
 
@@ -99,7 +110,7 @@ namespace Gestionale
 
         private void stampaTabellaVaccini() {
             datiPazienti.Rows.Clear();
-            string comandosql = "SELECT vacciniPazienti.idrVP as ID, vacciniPazienti.data, vacciniPazienti.dose, vaccini.tipo, vaccini.malattia FROM vaccini,vacciniPazienti WHERE vacciniPazienti.idp = '" + idp +"' AND vacciniPazienti.idv = vaccini.idv";
+            string comandosql = "SELECT vacciniPazienti.idrVP as ID, vacciniPazienti.data, vacciniPazienti.dose, vaccini.tipo, vaccini.malattia FROM vaccini,vacciniPazienti WHERE vacciniPazienti.idp = '" + idp + "' AND vacciniPazienti.idv = vaccini.idv";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
@@ -243,7 +254,7 @@ namespace Gestionale
                         int qt = Convert.ToInt32(db.getData(string.Format("SELECT quantita FROM scorte WHERE ids = '{0}'", id)));
                         if (qt > 0)
                         {
-                            dataGridView2.Rows.Add(dr["indirizzo"].ToString(), dr["email"].ToString(), qt , id);
+                            dataGridView2.Rows.Add(dr["indirizzo"].ToString(), dr["email"].ToString(), qt, id);
                         }
                     }
                     dr.Close();
@@ -252,11 +263,124 @@ namespace Gestionale
             }
         }
 
+        private void dataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView2[3, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi selezionare questa struttura?", "informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        idst = id;
+                        stampaOperatori(id);
+                        dataGridView2.Enabled = false;
+                        button9.Visible = true;
+                    }
+                }
+            }
+        }
+
+        // deselecta struttura
+        private void button9_Click(object sender, EventArgs e) {
+            dataGridView2.Enabled = true;
+            button9.Visible = false;
+            stampaOperatori("");
+        }
+
         // tabella operatori
         // dipende da strutture 
         // non caricare prima di aver caricato la struttura
-        private void stampaOperatori() {
+        private void stampaOperatori(string ids) {
+            string comandosql = "SELECT personale.nome,personale.cognome,operatori.idop FROM operatori,personale WHERE operatori.idop IN (SELECT idop FROM turni WHERE ids = '" + ids + "') AND operatori.idpe = personale.idpe";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataAdapter da = new SQLiteDataAdapter(comando);
+                    DataSet ds = new DataSet("tabelle");
+                    da.Fill(ds, "tabella");
+                    dataGridView3.DataSource = ds.Tables["tabella"];
+                    dataGridView3.Refresh();
+                }
+                connessione.Close();
+            }
+        }
+        // click tabella operatori
+        private void dataGridView3_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView2[3, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi selezionare questa struttura?", "informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        idst = id;
+                        stampaOperatori(id);
+                        dataGridView2.Enabled = false;
+                        button9.Visible = true;
+                    }
+                }
+            }
+        }
 
+        // aggiunta prenotazioni
+        private void button8_Click(object sender, EventArgs e) {
+            addPren();
+        }
+        private void addPren() {
+            string data = db.converter(dateTimePicker3.Text);
+            string ora = comboBox2.Text;
+            if (ora != "")
+            {
+                if (db.rowCount(string.Format("SELECT COUNT(*) FROM prenotazioniCovid WHERE data = '{0}' AND idp = '{1}'", data, idp)) == 0)
+                {
+                    db.esegui(string.Format("INSERT INTO prenotazioniCovid(idpr, idp, data, ora) VALUES('{0}', '{1}', '{2}', '{3}')", db.UUID(15, 5, 10), idp, data, ora));
+                    stampaPren();
+                }
+                else
+                {
+                    MessageBox.Show("Prenotazione già esistente", "informazioni");
+                }
+            }
+            else{
+                MessageBox.Show("Non è stato selezionato l'orario", "informazioni");
+            }
+        }
+        // stampa prenotazioni
+        private void stampaPren() {
+            string comandosql = string.Format("SELECT data,ora,idpr FROM prenotazioniCovid WHERE idp = '{0}'", idp);
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView6.Rows.Add(db.inverter(dr["data"].ToString()), dr["ora"].ToString(), dr["idpr"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
+        private void dataGridView6_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView2[2, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questa prenotazione?", "informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM prenotazioniCovid WHERE idpr = '{0}'", id));
+                        stampaPren();
+                    }
+                }
+            }
         }
     }
 }
