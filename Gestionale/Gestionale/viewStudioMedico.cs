@@ -152,7 +152,6 @@ namespace Gestionale
             }
         }
 
-
         // orari
         private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)

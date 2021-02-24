@@ -21,19 +21,15 @@ namespace Gestionale
             InitializeComponent();
             idp = id;
             caricaDati();
+            datiPazienti.Columns.Add("1", "ID"); datiPazienti.Columns.Add("1", "Data"); datiPazienti.Columns.Add("1", "Dose"); datiPazienti.Columns.Add("1", "Tipo"); datiPazienti.Columns.Add("1", "Malattia");
+            dataGridView2.Columns.Add("1", "Indirizzo"); dataGridView2.Columns.Add("1", "Email"); dataGridView2.Columns.Add("1", "Quantià"); dataGridView2.Columns.Add("1", "ids");
+            label1.Text = cognome + " " + nome;
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = Color.White;
+            this.datiPazienti.DefaultCellStyle.ForeColor = this.dataGridView6.DefaultCellStyle.ForeColor = this.dataGridView1.DefaultCellStyle.ForeColor = this.dataGridView2.DefaultCellStyle.ForeColor = this.dataGridView3.DefaultCellStyle.ForeColor = this.dataGridView4.DefaultCellStyle.ForeColor = this.dataGridView5.DefaultCellStyle.ForeColor = Color.Black;
             fillComboVaccini();
-            datiPazienti.Columns.Add("1", "ID");
-            datiPazienti.Columns.Add("1", "Data");
-            datiPazienti.Columns.Add("1", "Dose");
-            datiPazienti.Columns.Add("1", "Tipo");
-            datiPazienti.Columns.Add("1", "Malattia");
             stampaTabellaVaccini();
             stampaListaMedici();
             checkMedico();
-            label1.Text = cognome + " " + nome;
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = Color.White;
-            this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
-            this.dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -233,7 +229,23 @@ namespace Gestionale
 
         // tabella strutture
         private void stampaStrutture() {
-
+            /*
+            string comandosql = "SELECT strutture WHERE (SELECT quantita FROM scorte WHERE ids = struttre.ids) > 0";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView2.Rows.Add(dr["ID"].ToString(), db.inverter(dr["data"].ToString()), dr["dose"].ToString(), dr["tipo"].ToString(), dr["malattia"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+            */
         }
 
         // tabella operatori
