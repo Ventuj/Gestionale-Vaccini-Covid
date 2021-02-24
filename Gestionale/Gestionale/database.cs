@@ -223,11 +223,11 @@ namespace Gestionale
 
                         DROP TABLE IF EXISTS vaccinoCovid;
                         CREATE TABLE vaccinoCovid (
+                          idvc TEXT PRIMARY KEY NOT NULL,
                           idp TEXT NOT NULL,
                           idop TEXT NOT NULL,
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
-                          ora TEXT NOT NULL,
                           lotto TEXT NOT NULL,
                           dataproduzione TEXT NOT NULL,
                           dose TEXT NOT NULL,

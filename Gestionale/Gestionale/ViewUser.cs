@@ -20,20 +20,25 @@ namespace Gestionale
             InitializeComponent();
             idp = id;
             caricaDati();
-
+            // header tabelle
             datiPazienti.Columns.Add("1", "ID"); datiPazienti.Columns.Add("1", "Data"); datiPazienti.Columns.Add("1", "Dose"); datiPazienti.Columns.Add("1", "Tipo"); datiPazienti.Columns.Add("1", "Malattia");
             dataGridView2.Columns.Add("1", "Indirizzo"); dataGridView2.Columns.Add("1", "Email"); dataGridView2.Columns.Add("1", "Quantià"); dataGridView2.Columns.Add("1", "ids");
             dataGridView6.Columns.Add("1", "Data"); dataGridView6.Columns.Add("1", "Ora"); dataGridView6.Columns.Add("1", "id");
+            dataGridView4.Columns.Add("1", "Data"); dataGridView4.Columns.Add("1", "Lotto"); dataGridView4.Columns.Add("1", "Data Di Produzione"); dataGridView4.Columns.Add("1", "Dose"); dataGridView4.Columns.Add("1", "idv");
 
+            // stilistica
             label1.Text = cognome + " " + nome;
             groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = groupBox9.ForeColor = Color.White;
             this.datiPazienti.DefaultCellStyle.ForeColor = this.dataGridView6.DefaultCellStyle.ForeColor = this.dataGridView1.DefaultCellStyle.ForeColor = this.dataGridView2.DefaultCellStyle.ForeColor = this.dataGridView3.DefaultCellStyle.ForeColor = this.dataGridView4.DefaultCellStyle.ForeColor = this.dataGridView5.DefaultCellStyle.ForeColor = Color.Black;
+            // caricamenti
+            stampaPren();
             fillComboVaccini();
             stampaTabellaVaccini();
             stampaListaMedici();
             checkMedico();
             stampaStrutture();
             fillCombo();
+            stampaCovid();
         }
 
         private void fillCombo() {
@@ -226,12 +231,66 @@ namespace Gestionale
 
         // inserimento vaccino covid
         private void button3_Click(object sender, EventArgs e) {
+            if (idop != "" && idst != "")
+            {
+                if (textBox1.Text != "" && textBox2.Text != "")
+                {
+                    if (db.rowCount(string.Format("SELECT COUNT(*) FROM vaccinoCovid WHERE idp = '{0}' AND data = '{1}'", idp, db.converter(dateTimePicker1.Text))) == 0)
+                    {
+                        db.esegui(string.Format("INSERT INTO vaccinoCovid(idvc, idp, idop, ids, data, dataproduzione, lotto, dose) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}','{6}','{7}')", db.UUID(19, 9, 15),idp, idop, idst, db.converter(dateTimePicker1.Text), db.converter(dateTimePicker4.Text), textBox2.Text, textBox1.Text));
+                        stampaCovid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Non è possibile inserire un altro vaccino in questa data", "informazioni");
 
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Non sono stati compilati tutti i campi", "informazioni");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Per poter inserire la vaccinazione è necessario selezionare struttura e operatore", "informazioni");
+            }
         }
 
         // tabella vaccinazioni covid 
         private void stampaCovid() {
-
+            dataGridView4.Rows.Clear();
+            string comandosql = "SELECT idvc,data,lotto,dataproduzione,dose FROM vaccinoCovid WHERE idp = '"+ idp +"'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView4.Rows.Add(db.inverter(dr["data"].ToString()), dr["lotto"].ToString(), db.inverter(dr["dataproduzione"].ToString()), dr["dose"].ToString(), dr["idvc"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
+        // Tabella covid 
+        private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView4[4, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questa riga", "informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM vaccinoCovid WHERE idvc = '{0}'", id));
+                        stampaCovid();
+                    }
+                }
+            }
         }
 
         // tabella accertamenti
@@ -292,7 +351,7 @@ namespace Gestionale
         // dipende da strutture 
         // non caricare prima di aver caricato la struttura
         private void stampaOperatori(string ids) {
-            string comandosql = "SELECT personale.nome,personale.cognome,operatori.idop FROM operatori,personale WHERE operatori.idop IN (SELECT idop FROM turni WHERE ids = '" + ids + "') AND operatori.idpe = personale.idpe";
+            string comandosql = "SELECT personale.cognome,personale.nome,operatori.idop FROM operatori,personale WHERE operatori.idop IN (SELECT idop FROM turni WHERE ids = '" + ids + "') AND operatori.idpe = personale.idpe";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
                 connessione.Open();
@@ -313,14 +372,12 @@ namespace Gestionale
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
-                    string id = this.dataGridView2[3, e.RowIndex].Value.ToString();
-                    DialogResult dialogResult = MessageBox.Show("Vuoi selezionare questa struttura?", "informazioni", MessageBoxButtons.YesNo);
+                    string id = this.dataGridView3[2, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi selezionare questo operatore?", "informazioni", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        idst = id;
-                        stampaOperatori(id);
-                        dataGridView2.Enabled = false;
-                        button9.Visible = true;
+                        idop = id;
+                        label23.Text = this.dataGridView3[0, e.RowIndex].Value.ToString() + " " + this.dataGridView3[1, e.RowIndex].Value.ToString();
                     }
                 }
             }
