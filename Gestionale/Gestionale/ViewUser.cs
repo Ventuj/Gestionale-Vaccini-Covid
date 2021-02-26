@@ -56,6 +56,10 @@ namespace Gestionale
             {
                 db.esegui(string.Format(@"UPDATE pazienti SET nome = '{0}', cognome = '{1}', codiceFiscale = '{2}',luogodinascita = '{3}',indirizzo = '{4}',telefono = '{5}', cellulare = '{6}', email = '{7}' WHERE idp = '{8}'", txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtTel.Text, txtCel.Text, txtEmail.Text, idp));
             }
+            else
+            {
+                MessageBox.Show("Non sono stati compilati tutti i campi", "informazioni");
+            }
         }
 
         private void datiPazienti_CellDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
