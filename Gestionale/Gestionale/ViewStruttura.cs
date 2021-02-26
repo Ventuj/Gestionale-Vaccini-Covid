@@ -14,18 +14,23 @@ namespace Gestionale
     public partial class ViewStruttura : Form
     {
         string ids, indirizo, email = "";
-        int massimali = 0;
+        int massimali, quantita  = 0;
         database db = new database();
 
         public ViewStruttura(string id) {
             InitializeComponent();
             ids = id;
             groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = Color.White;
+            dataGridView3.Columns.Add("1", "Quantità");
+            dataGridView3.Columns.Add("1", "Data Partenza"); 
+            dataGridView3.Columns.Add("1", "Data Arrivo");  
+            dataGridView3.Columns.Add("1", "ID"); 
             caricaDati();
             fillCombo();
             tableOperatori();
             stampaTurni();
             stampaOrari();
+            stampaSped();
         }
 
         private void fillCombo() {
@@ -43,6 +48,7 @@ namespace Gestionale
             email = txtEmail.Text = Convert.ToString(db.getData(string.Format("SELECT email FROM strutture WHERE ids = '{0}'", ids)));
             massimali = Convert.ToInt32(db.getData(string.Format("SELECT massimali FROM strutture WHERE ids = '{0}'", ids)));
             lbldispo.Text = Convert.ToString(db.getData(string.Format("SELECT quantita FROM SCORTE WHERE ids = '{0}'", ids)));
+            quantita = Convert.ToInt32(db.getData(string.Format("SELECT quantita FROM SCORTE WHERE ids = '{0}'", ids)));
         }
 
         // Update
@@ -230,6 +236,81 @@ namespace Gestionale
                     datiPazienti.Refresh();
                 }
                 connessione.Close();
+            }
+        }
+
+        private void txtCel_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            addSped();
+        }
+
+        public void addSped() {
+            caricaDati();
+            if (txtCel.Text != "")
+            {
+                int val = Convert.ToInt32(txtCel.Text);
+                if ((quantita + val) <= massimali)
+                {
+                    db.esegui(string.Format("INSERT INTO spedizioni(idspe, ids, datap, datac, quantita) VALUES('{0}','{1}', '{2}', '{3}', {4})",db.UUID(17, 8, 15), ids, db.converter(dateTimePicker1.Text), db.converter(dateTimePicker2.Text), val));
+                    int ponte = quantita + val;
+                    db.esegui(string.Format("UPDATE scorte SET quantita = {0} WHERE ids = '{1}'", ponte, ids));
+                    txtCel.Text = "";
+                    stampaSped();
+                    caricaDati();
+                }
+                else {
+                    MessageBox.Show("La struttura non può accettare così tanti vaccini ", "informazioni");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Non è stata inserita alcuna quantità", "informazioni");
+            }
+        }
+
+        public void stampaSped() {
+            //dataGridView3
+            dataGridView3.Rows.Clear();
+            string comandosql = "SELECT * FROM spedizioni WHERE ids = '"+ ids +"'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView3.Rows.Add(dr["quantita"].ToString(), db.inverter(dr["datap"].ToString()), db.inverter(dr["datac"].ToString()), dr["idspe"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
+
+        private void dataGridView3_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    string id = this.dataGridView3[3, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM spedizioni WHERE idspe = '{0}'", id));
+                        caricaDati();
+                    }
+                }
             }
         }
     }

@@ -239,13 +239,26 @@ namespace Gestionale
                 {
                     if (db.rowCount(string.Format("SELECT COUNT(*) FROM vaccinoCovid WHERE idp = '{0}' AND data = '{1}'", idp, db.converter(dateTimePicker1.Text))) == 0)
                     {
-                        db.esegui(string.Format("INSERT INTO vaccinoCovid(idvc, idp, idop, ids, data, dataproduzione, lotto, dose) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}','{6}','{7}')", db.UUID(19, 9, 15),idp, idop, idst, db.converter(dateTimePicker1.Text), db.converter(dateTimePicker4.Text), textBox2.Text, textBox1.Text));
-                        stampaCovid();
+                        int count = Convert.ToInt32(db.getData(string.Format("SELECT quantita FROM scorte WHERE ids = '{0}'", idst)));
+                        if (count > 0)
+                        {
+                            db.esegui(string.Format("INSERT INTO vaccinoCovid(idvc, idp, idop, ids, data, dataproduzione, lotto, dose) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}','{6}','{7}')", db.UUID(19, 9, 15), idp, idop, idst, db.converter(dateTimePicker1.Text), db.converter(dateTimePicker4.Text), textBox2.Text, textBox1.Text));
+
+                            db.esegui(string.Format("UPDATE scorte SET quantita = {0} WHERE ids = '{1}'", count - 1, idst));
+                            stampaCovid();
+                            dataGridView2.Enabled = true;
+                            button9.Visible = false;
+                            stampaOperatori("");
+                            stampaStrutture();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Questa struttura è sprovvista di vaccini", "informazioni");
+                        }
                     }
                     else
                     {
                         MessageBox.Show("Non è possibile inserire un altro vaccino in questa data", "informazioni");
-
                     }
                 }
                 else
@@ -389,7 +402,9 @@ namespace Gestionale
         }
 
         // tabella strutture
+
         private void stampaStrutture() {
+            dataGridView2.Rows.Clear();
             string comandosql = "SELECT indirizzo,email,ids FROM strutture";
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
@@ -498,6 +513,7 @@ namespace Gestionale
         }
         // stampa prenotazioni
         private void stampaPren() {
+            dataGridView6.Rows.Clear();
             string comandosql = string.Format("SELECT data,ora,idpr FROM prenotazioniCovid WHERE idp = '{0}'", idp);
             using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
             {
@@ -519,7 +535,7 @@ namespace Gestionale
             {
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
-                    string id = this.dataGridView2[2, e.RowIndex].Value.ToString();
+                    string id = this.dataGridView6[2, e.RowIndex].Value.ToString();
                     DialogResult dialogResult = MessageBox.Show("Vuoi eliminare questa prenotazione?", "informazioni", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {

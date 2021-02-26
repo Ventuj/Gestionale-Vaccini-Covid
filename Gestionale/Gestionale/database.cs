@@ -197,6 +197,7 @@ namespace Gestionale
 
                         DROP TABLE IF EXISTS orelavorate;
                         CREATE TABLE orelavorate (
+                          ido TEXT PRIMARY KEY NOT NULL,
                           idop TEXT NOT NULL,
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
@@ -207,6 +208,7 @@ namespace Gestionale
 
                         DROP TABLE IF EXISTS spedizioni;
                         CREATE TABLE spedizioni (
+                          idspe TEXT PRIMARY KEY NOT NULL,
                           ids TEXT NOT NULL,
                           datap TEXT NOT NULL,
                           datac TEXT NOT NULL,
