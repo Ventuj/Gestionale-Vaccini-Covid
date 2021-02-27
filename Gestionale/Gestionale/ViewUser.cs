@@ -499,20 +499,29 @@ namespace Gestionale
         private void addPren() {
             string data = db.converter(dateTimePicker3.Text);
             string ora = comboBox2.Text;
-            if (ora != "")
+            if (idst != "")
             {
-                if (db.rowCount(string.Format("SELECT COUNT(*) FROM prenotazioniCovid WHERE data = '{0}' AND idp = '{1}'", data, idp)) == 0)
+                if (ora != "")
                 {
-                    db.esegui(string.Format("INSERT INTO prenotazioniCovid(idpr, idp, data, ora) VALUES('{0}', '{1}', '{2}', '{3}')", db.UUID(15, 5, 10), idp, data, ora));
-                    stampaPren();
+                    if (db.rowCount(string.Format("SELECT COUNT(*) FROM prenotazioniCovid WHERE data = '{0}' AND idp = '{1}'", data, idp)) == 0)
+                    {
+                        db.esegui(string.Format("INSERT INTO prenotazioniCovid(idpr, ids, idp, data, ora) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", db.UUID(15, 5, 10), idst, idp, data, ora));
+                        stampaPren();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Prenotazione già esistente", "informazioni");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Prenotazione già esistente", "informazioni");
+                    MessageBox.Show("Non è stato selezionato l'orario", "informazioni");
                 }
             }
-            else{
-                MessageBox.Show("Non è stato selezionato l'orario", "informazioni");
+            else
+            {
+                MessageBox.Show("Per poter inserire la vaccinazione è necessario selezionare la struttura", "informazioni");
+
             }
         }
         // stampa prenotazioni

@@ -242,10 +242,12 @@ namespace Gestionale
                         DROP TABLE IF EXISTS prenotazioniCovid;
                         CREATE TABLE prenotazioniCovid (
                           idpr TEXT PRIMARY KEY NOT NULL,
+                          ids TEXT NOT NULL,
                           idp TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE,
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS accertamento;

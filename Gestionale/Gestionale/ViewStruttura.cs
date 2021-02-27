@@ -20,17 +20,16 @@ namespace Gestionale
         public ViewStruttura(string id) {
             InitializeComponent();
             ids = id;
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = Color.White;
-            dataGridView3.Columns.Add("1", "Quantità");
-            dataGridView3.Columns.Add("1", "Data Partenza"); 
-            dataGridView3.Columns.Add("1", "Data Arrivo");  
-            dataGridView3.Columns.Add("1", "ID"); 
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = groupBox7.ForeColor = groupBox8.ForeColor = Color.White;
+            dataGridView3.Columns.Add("1", "Quantità");dataGridView3.Columns.Add("1", "Data Partenza"); dataGridView3.Columns.Add("1", "Data Arrivo");  dataGridView3.Columns.Add("1", "ID");
+            dataGridView4.Columns.Add("1", "Cognome"); dataGridView4.Columns.Add("1", "Nome"); dataGridView4.Columns.Add("1", "Data"); dataGridView4.Columns.Add("1", "Orario"); dataGridView4.Columns.Add("1", "IDPR"); dataGridView4.Columns.Add("1", "IDP");
             caricaDati();
             fillCombo();
             tableOperatori();
             stampaTurni();
             stampaOrari();
             stampaSped();
+            stampaPren();
         }
 
         private void fillCombo() {
@@ -309,6 +308,54 @@ namespace Gestionale
                     {
                         db.esegui(string.Format("DELETE FROM spedizioni WHERE idspe = '{0}'", id));
                         caricaDati();
+                    }
+                }
+            }
+        }
+
+        private void stampaPren() {
+            dataGridView4.Rows.Clear();
+            string comandosql = string.Format("SELECT prenotazioniCovid.data, prenotazioniCovid.ora, prenotazioniCovid.idpr, pazienti.nome, pazienti.cognome, prenotazioniCovid.idp FROM prenotazioniCovid,pazienti WHERE prenotazioniCovid.ids = '{0}' AND prenotazioniCovid.idp = pazienti.idp", ids);
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView4.Rows.Add(dr["cognome"].ToString(), dr["nome"].ToString(), db.inverter(dr["data"].ToString()), dr["ora"].ToString(), dr["idpr"].ToString(), dr["idp"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
+
+        private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    string id = this.dataGridView4[4, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Sei sicuro di voler eliminare questa riga?", "eliminazione", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM prenotazioniCovid WHERE idpr = '{0}'", id));
+                        caricaDati();
+                    }
+                }
+                else
+                {
+                    string id = this.dataGridView4[5, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi vedere questo paziente?", "informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        ViewUser view = new ViewUser(id);
+                        this.Hide();
+                        view.ShowDialog();
+                        stampaPren();
+                        this.Show();
                     }
                 }
             }

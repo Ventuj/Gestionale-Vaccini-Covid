@@ -24,8 +24,11 @@ namespace Gestionale
             checkST();
             controlloOP();
             stampaPazienti();
-            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = Color.White;
+            stampaOreLav();
+            groupBox1.ForeColor = groupBox2.ForeColor = groupBox3.ForeColor = groupBox4.ForeColor = groupBox5.ForeColor = groupBox6.ForeColor = Color.White;
             this.datiPazienti.DefaultCellStyle.ForeColor = Color.Black;
+            dataGridView1.Columns.Add("1", "Data"); dataGridView1.Columns.Add("1", "Ora"); dataGridView1.Columns.Add("1", "ido"); dataGridView1.Columns.Add("1", "idst");
+
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -51,6 +54,7 @@ namespace Gestionale
                 db.esegui(string.Format("UPDATE personale SET nome = '{0}', cognome = '{1}', codiceFiscale = '{2}',luogodinascita = '{3}',indirizzo = '{4}', cellulare = '{5}', email = '{6}' WHERE idpe = '{7}'", txtNome.Text, txtCognome.Text, textCF.Text, txtLuogoDN.Text, txtIndirizzo.Text, txtCel.Text, txtEmail.Text, idpe));
             }
         }
+
 
         private bool checkOP() {
             if (db.rowCount(string.Format("SELECT COUNT(*) FROM operatori WHERE idpe = '{0}'", idpe)) > 0)
@@ -81,9 +85,13 @@ namespace Gestionale
             {
                 button2.Visible = false;
                 button4.Visible = true;
+                groupBox5.Enabled = true;
+                groupBox6.Enabled = true;
             }
             else
             {
+                groupBox5.Enabled = false;
+                groupBox6.Enabled = false;
                 if (checkStudio())
                 {
                     button2.Visible = button4.Visible = false;
@@ -157,6 +165,85 @@ namespace Gestionale
                 view.ShowDialog();
                 stampaPazienti();
                 this.Show();
+            }
+        }
+
+        private string getIDST() {
+            return  Convert.ToString(db.getData(string.Format("SELECT ids FROM turni WHERE idop = (SELECT idop FROM operatori WHERE idpe = '{0}') LIMIT 1", idpe)));
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void addOra() {
+            if (textBox1.Text != "")
+            {
+                db.esegui(string.Format("INSERT INTO orelavorate(ido, idop, ids, data, ora) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", db.UUID(19, 6, 16), idop, getIDST(), db.converter(dateTimePicker1.Text), textBox1.Text));
+                stampaOreLav();
+            }
+            else
+            {
+                MessageBox.Show("Informazioni mancanti", "informazioni");
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+            addOra();
+        }
+        
+        private void stampaOreLav() {
+            dataGridView1.Rows.Clear();
+            string comandosql = "SELECT * FROM orelavorate WHERE idop = '"+ idop +"'";
+            using (SQLiteConnection connessione = new SQLiteConnection(db.stringaConnessione))
+            {
+                connessione.Open();
+                using (SQLiteCommand comando = new SQLiteCommand(comandosql, connessione))
+                {
+                    SQLiteDataReader dr = comando.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        dataGridView1.Rows.Add(db.inverter(dr["data"].ToString()), dr["ora"].ToString(), dr["ido"].ToString(), dr["ids"].ToString());
+                    }
+                    dr.Close();
+                }
+                connessione.Close();
+            }
+        }
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                
+                if (e.Button == MouseButtons.Right)
+                {
+                    string id = this.dataGridView1[2, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi rimuovere questa riga?", "Informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        db.esegui(string.Format("DELETE FROM orelavorate WHERE ido = '{0}'", id));
+                        stampaOreLav();
+                    }
+                }
+                else
+                {
+                    string id = this.dataGridView1[3, e.RowIndex].Value.ToString();
+                    DialogResult dialogResult = MessageBox.Show("Vuoi vedere i dati di questa struttura?", "Informazioni", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        ViewStruttura view = new ViewStruttura(id);
+                        this.Hide();
+                        view.ShowDialog();
+                        stampaOreLav();
+                        this.Show();
+                    }
+                }
             }
         }
     }
