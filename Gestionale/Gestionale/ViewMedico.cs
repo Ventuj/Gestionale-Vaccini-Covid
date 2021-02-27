@@ -85,8 +85,11 @@ namespace Gestionale
             {
                 button2.Visible = false;
                 button4.Visible = true;
-                groupBox5.Enabled = true;
-                groupBox6.Enabled = true;
+                if (getIDST() != "")
+                {
+                    groupBox5.Enabled = true;
+                    groupBox6.Enabled = true;
+                }
             }
             else
             {
@@ -184,14 +187,21 @@ namespace Gestionale
         }
 
         private void addOra() {
-            if (textBox1.Text != "")
+            if (textBox1.Text != "" && Convert.ToInt32(textBox1.Text) <= 12)
             {
-                db.esegui(string.Format("INSERT INTO orelavorate(ido, idop, ids, data, ora) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", db.UUID(19, 6, 16), idop, getIDST(), db.converter(dateTimePicker1.Text), textBox1.Text));
-                stampaOreLav();
+                if (db.rowCount(string.Format("SELECT COUNT(*) FROM orelavorate WHERE idop = '{0}' AND data = '{1}'", idop, db.converter(dateTimePicker1.Text))) == 0)
+                {
+                    db.esegui(string.Format("INSERT INTO orelavorate(ido, idop, ids, data, ora) VALUES('{0}', '{1}', '{2}', '{3}', '{4}')", db.UUID(19, 6, 16), idop, getIDST(), db.converter(dateTimePicker1.Text), textBox1.Text));
+                    stampaOreLav();
+                }
+                else
+                {
+                    MessageBox.Show("Sono già state inserite delle ore per questa data", "informazioni");
+                }
             }
             else
             {
-                MessageBox.Show("Informazioni mancanti", "informazioni");
+                MessageBox.Show("Informazioni mancanti o errate", "informazioni");
             }
         }
 

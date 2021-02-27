@@ -94,6 +94,7 @@
 
                         DROP TABLE IF EXISTS orelavorate;
                         CREATE TABLE orelavorate (
+                          ido TEXT PRIMARY KEY NOT NULL,
                           idop TEXT NOT NULL,
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
@@ -104,6 +105,7 @@
 
                         DROP TABLE IF EXISTS spedizioni;
                         CREATE TABLE spedizioni (
+                          idspe TEXT PRIMARY KEY NOT NULL,
                           ids TEXT NOT NULL,
                           datap TEXT NOT NULL,
                           datac TEXT NOT NULL,
@@ -120,11 +122,11 @@
 
                         DROP TABLE IF EXISTS vaccinoCovid;
                         CREATE TABLE vaccinoCovid (
+                          idvc TEXT PRIMARY KEY NOT NULL,
                           idp TEXT NOT NULL,
                           idop TEXT NOT NULL,
                           ids TEXT NOT NULL,
                           data TEXT NOT NULL,
-                          ora TEXT NOT NULL,
                           lotto TEXT NOT NULL,
                           dataproduzione TEXT NOT NULL,
                           dose TEXT NOT NULL,
@@ -137,12 +139,12 @@
                         DROP TABLE IF EXISTS prenotazioniCovid;
                         CREATE TABLE prenotazioniCovid (
                           idpr TEXT PRIMARY KEY NOT NULL,
-                          idp TEXT NOT NULL,
                           ids TEXT NOT NULL,
+                          idp TEXT NOT NULL,
                           data TEXT NOT NULL,
                           ora TEXT NOT NULL,
-                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE,
-                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE
+                          FOREIGN KEY (idp) REFERENCES pazienti(idp) ON DELETE CASCADE,
+                          FOREIGN KEY (ids) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
 
                         DROP TABLE IF EXISTS accertamento;
@@ -167,9 +169,10 @@
 
                         DROP TABLE IF EXISTS orari;
                         CREATE TABLE orari (
+                          ido TEXT PRIMARY KEY NOT NULL,
                           id TEXT NOT NULL,
                           orario TEXT NOT NULL,
-                          giorno INTEGER NOT NULL,
+                          giorno TEXT NOT NULL,
                           FOREIGN KEY (id) REFERENCES studiomedico(idst) ON DELETE CASCADE,
                           FOREIGN KEY (id) REFERENCES strutture(ids) ON DELETE CASCADE
                         );
